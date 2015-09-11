@@ -52,7 +52,6 @@ public class FPSMeterController
 
     public void showData(FPSConfig fpsConfig, List<Long> dataSet) {
 
-        long start = System.currentTimeMillis();
 
         //metric
         int runningOver = 0;
@@ -80,18 +79,13 @@ public class FPSMeterController
         float percentOver = (float)runningOver/(float)size;
         //Log.e("########","METRIC"+percentOver);
 
-        if (percentOver >= 0.2) {
+        if (percentOver >= fpsConfig.redFlagPercentage) {
             meterView.setBackgroundResource(R.drawable.fpsmeterring_bad);
-        } else if (percentOver >= 0.04) {
+        } else if (percentOver >= fpsConfig.yellowFlagPercentage) {
             meterView.setBackgroundResource(R.drawable.fpsmeterring_medium);
         } else {
             meterView.setBackgroundResource(R.drawable.fpsmeterring_good);
         }
-
-
-
-        long end = System.currentTimeMillis();
-        Log.e("########", "THUG:processtime:" + (end - start) + "ms");
 
         ((TextView) meterView).setText(realAnswer + "");
 

@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class FPSConfig implements Serializable
 {
+    public float redFlagPercentage = 0.2f;
+    public float yellowFlagPercentage = 0.05f;
     public float refreshRate;
     public long sampleTimeInMs = 736;//928;//736; // default sample time
     public float deviceRefreshRateInMs; //value from device ex 16.6 ms

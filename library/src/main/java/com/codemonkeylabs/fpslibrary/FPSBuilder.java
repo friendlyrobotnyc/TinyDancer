@@ -35,8 +35,22 @@ public class FPSBuilder
         context.stopService(new Intent(context, FPSService.class));
     }
 
-    public FPSBuilder setSampleTime(long sampleTimeInMS){
+    // PUBLIC BUILDER METHODS
+    public FPSBuilder sampleTime(long sampleTimeInMS){
         fpsConfig.sampleTimeInMs = sampleTimeInMS;
         return this;
     }
+
+    public FPSBuilder redFlagPercentage(float percentage)
+    {
+        fpsConfig.redFlagPercentage = percentage;
+        return this;
+    }
+
+    public FPSBuilder yellowFlagPercentage(float percentage)
+    {
+        fpsConfig.yellowFlagPercentage = percentage;
+        return this;
+    }
+
 }

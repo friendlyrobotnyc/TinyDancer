@@ -3,28 +3,16 @@ package com.codemonkeylabs.fpslibrary.service;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PixelFormat;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Choreographer;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.codemonkeylabs.fpslibrary.FPSConfig;
 import com.codemonkeylabs.fpslibrary.FPSFrameCallback;
 import com.codemonkeylabs.fpslibrary.R;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by brianplummer on 8/29/15.
@@ -78,9 +66,14 @@ public class FPSService extends Service
     @Override
     public void onDestroy()
     {
+        // this removes the view from the window
         fpsMeterController.destroy();
+        // this tells the callback to stop registering itself
         fpsFrameCallback.setEnabled(false);
-        Choreographer.getInstance().removeFrameCallback(fpsFrameCallback);
+
+        // paranoia cha-cha-cha
+        fpsMeterController = null;
+        fpsFrameCallback = null;
         super.onDestroy();
     }
 
