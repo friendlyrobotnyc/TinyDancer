@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         final FPSSampleAdpater adapter = new FPSSampleAdpater();
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioGroup.check(R.id.defaultZero);
+        radioGroup.check(R.id.defaultFive);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
             {
                 RadioButton button = (RadioButton) radioGroup.findViewById(i);
                 adapter.setMegaBytes(Float.valueOf(button.getText().toString()));
+                adapter.notifyDataSetChanged();
             }
         });
 

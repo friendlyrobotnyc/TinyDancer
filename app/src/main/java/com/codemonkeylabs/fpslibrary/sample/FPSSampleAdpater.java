@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 public class FPSSampleAdpater extends RecyclerView.Adapter<FPSSampleViewHolder>
 {
 
-    private float megaBytes = 0;
+    private float megaBytes = 5;
 
     @Override
     public FPSSampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType)

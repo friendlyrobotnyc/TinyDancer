@@ -1,4 +1,4 @@
-package com.codemonkeylabs.fpslibrary;
+package com.codemonkeylabs.fpslibrary.service;
 
 import android.app.Service;
 import android.graphics.PixelFormat;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.codemonkeylabs.fpslibrary.FPSConfig;
+import com.codemonkeylabs.fpslibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;

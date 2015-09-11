@@ -2,6 +2,8 @@ package com.codemonkeylabs.fpslibrary;
 
 import android.view.Choreographer;
 
+import com.codemonkeylabs.fpslibrary.service.FPSMeterController;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,19 +3,21 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:padding="20dip"
-              android:gravity="left|center_vertical">
+              android:gravity="center_vertical"
+              android:padding="20dip">
 
     <ImageView
+        android:layout_gravity="left|center_vertical"
         android:id="@+id/colorImg"
         android:layout_width="50dip"
         android:layout_height="50dip"/>
 
     <TextView
-        android:id="@+id/colorValue"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/bindTime"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
