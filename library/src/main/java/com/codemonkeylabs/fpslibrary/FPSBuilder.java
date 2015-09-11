@@ -18,13 +18,6 @@ public class FPSBuilder
         fpsConfig = new FPSConfig();
     }
 
-    public void show(Context context) {
-        Intent intent = new Intent(context, FPSService.class);
-        setFrameRate(context);
-        intent.putExtra(FPSService.ARG_FPS_CONFIG, fpsConfig);
-        context.startService(intent);
-    }
-
     private void setFrameRate(Context context){
         Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         fpsConfig.deviceRefreshRateInMs = 1000f/display.getRefreshRate();
@@ -36,6 +29,13 @@ public class FPSBuilder
     }
 
     // PUBLIC BUILDER METHODS
+    public void show(Context context) {
+        Intent intent = new Intent(context, FPSService.class);
+        setFrameRate(context);
+        intent.putExtra(FPSService.ARG_FPS_CONFIG, fpsConfig);
+        context.startService(intent);
+    }
+
     public FPSBuilder sampleTime(long sampleTimeInMS){
         fpsConfig.sampleTimeInMs = sampleTimeInMS;
         return this;
