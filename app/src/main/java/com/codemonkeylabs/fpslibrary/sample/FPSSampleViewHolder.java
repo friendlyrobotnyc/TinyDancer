@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class FPSSampleViewHolder extends RecyclerView.ViewHolder
 {
 
-    private long[] data;
+    private int[] data;
     private ImageView colorImg;
     private TextView bindTime;
 
@@ -22,7 +22,7 @@ public class FPSSampleViewHolder extends RecyclerView.ViewHolder
         super(itemView);
         colorImg = (ImageView) itemView.findViewById(R.id.colorImg);
         bindTime = (TextView) itemView.findViewById(R.id.bindTime);
-        data = new long[1024*10];
+        data = new int[1024*10];
     }
 
     public void onBind(int value, float megaBytes) {
@@ -40,12 +40,13 @@ public class FPSSampleViewHolder extends RecyclerView.ViewHolder
 
         int total = (int)(megaBytes*100f);
         long start = System.currentTimeMillis();
+        int startInt = (int) start;
         for (int i = 0; i < total; i++)
         {
             for (int e = 0; e < data.length; e++)
             {
                 // set dummy value (start time)
-                data[e] = start;
+                data[e] = startInt;
             }
         }
         long end = System.currentTimeMillis();
