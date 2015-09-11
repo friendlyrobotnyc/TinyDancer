@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.codemonkeylabs.fpslibrary.Calculation;
 import com.codemonkeylabs.fpslibrary.FPSConfig;
 import com.codemonkeylabs.fpslibrary.R;
 
@@ -58,7 +59,7 @@ public class FPSMeterController
         // total dropped
         int dropped = 0;
 
-        List<Integer> droppedSet = getDroppedSet(fpsConfig, dataSet);
+        List<Integer> droppedSet = Calculation.getDroppedSet(fpsConfig, dataSet);
 
         for(Integer k : droppedSet){
             dropped+=k;
@@ -91,28 +92,6 @@ public class FPSMeterController
 
     }
 
-    private List<Integer> getDroppedSet(FPSConfig fpsConfig, List<Long> dataSet)
-    {
-        List<Integer> droppedSet = new ArrayList<>();
-        long start = 0;
-        for (Long value : dataSet) {
-            if (start == 0) {
-                start = value;
-                continue;
-            }
-
-            long diffNs = value - start;
-            start = value;
-            long diffMs = TimeUnit.MILLISECONDS.convert(diffNs, TimeUnit.NANOSECONDS);
-            long dev = Math.round(fpsConfig.deviceRefreshRateInMs);
-            if (diffMs > dev) {
-                long ugh = (diffMs / dev);//(long)fpsConfig.deviceRefreshRateInMs);
-                Log.e("#####","BLAH::" + diffMs + ":"+ugh);
-                droppedSet.add((int)ugh);
-            }
-        }
-        return droppedSet;
-    }
 
 
     private void setMeterListener(final WindowManager.LayoutParams paramsF) {

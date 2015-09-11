@@ -13,16 +13,14 @@ import java.util.List;
 public class FPSFrameCallback implements Choreographer.FrameCallback
 {
     private FPSConfig fpsConfig;
-    private Choreographer choreographer;
     private FPSMeterController fpsMeterController;
-    private List<Long> dataSet;
+    private List<Long> dataSet; //holds the frame times of the sample set
     private boolean enabled = true;
     private long startSampleTimeInNs = 0;
 
     public FPSFrameCallback(FPSConfig fpsConfig, FPSMeterController fpsMeterController) {
         this.fpsConfig = fpsConfig;
         this.fpsMeterController = fpsMeterController;
-        choreographer = Choreographer.getInstance();
         dataSet = new ArrayList<Long>();
     }
 
@@ -33,7 +31,9 @@ public class FPSFrameCallback implements Choreographer.FrameCallback
     @Override
     public void doFrame(long frameTimeNanos)
     {
+        //if not enabled then we bail out now and don't register the callback
         if (!enabled){
+            destroy();
             return;
         }
 
@@ -47,13 +47,26 @@ public class FPSFrameCallback implements Choreographer.FrameCallback
         if (frameTimeNanos-startSampleTimeInNs > fpsConfig.getSampleTimeInNs()){
             List<Long> dataSetCopy = new ArrayList<Long>();
             dataSetCopy.addAll(dataSet);
+
+            //push data to the controller
             fpsMeterController.showData(fpsConfig, dataSetCopy);
+
+            // clear data
             dataSet.clear();
+            //reset sample timer to last frame
             startSampleTimeInNs = frameTimeNanos;
         }
         dataSet.add(frameTimeNanos);
 
-        choreographer.postFrameCallback(this);
+        //we need to register for the next frame callback
+        Choreographer.getInstance().postFrameCallback(this);
+    }
+
+    private void destroy()
+    {
+        dataSet.clear();
+        fpsConfig = null;
+        fpsMeterController = null;
     }
 
 }
