@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity
 {
     private RadioGroup radioGroup;
     private RecyclerView recyclerView;
+    private boolean isShowing = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(RadioGroup radioGroup, int i)
             {
                 RadioButton button = (RadioButton) radioGroup.findViewById(i);
-                Log.e("#####", "THUG:" + button.getText());
                 adapter.setMegaBytes(Float.valueOf(button.getText().toString()));
             }
         });
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 FPSLibrary.create().show(view.getContext());
+                isShowing = true;
             }
         });
 
@@ -65,8 +66,10 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 FPSLibrary.hide(view.getContext());
+                isShowing = false;
             }
         });
+
 
     }
 
@@ -94,4 +97,21 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (isShowing) {
+            FPSLibrary.create().show(getApplicationContext());
+        }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if (isShowing) {
+            FPSLibrary.hide(getApplicationContext());
+        }
+    }
 }

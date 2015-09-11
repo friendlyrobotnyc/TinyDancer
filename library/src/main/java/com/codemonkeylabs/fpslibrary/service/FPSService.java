@@ -43,13 +43,6 @@ public class FPSService extends Service
         image.setText((int) fpsConfig.refreshRate + "");
         image.setPadding(20,20,20,20);
 
-
-
-        //View view = new View(this);
-        //view.setBackground(new FPSMeterDrawable());//new ColorDrawable(Color.RED));
-
-        //FPSMeterDrawable fpsMeterDrawable = new FPSMeterDrawable();
-        //imfage.setBackground(fpsMeterDrawable);
         image.setBackgroundResource(R.drawable.fpsmeterring_good);
 
         fpsMeterController = new FPSMeterController(image);

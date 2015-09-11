@@ -35,8 +35,6 @@ public class FPSMeterController
         WindowManager.LayoutParams paramsF = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                //200,
-                //200,
                 WindowManager.LayoutParams.TYPE_PHONE,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
@@ -92,8 +90,7 @@ public class FPSMeterController
         long end = System.currentTimeMillis();
         Log.e("########", "THUG:processtime:" + (end - start) + "ms");
 
-
-        ((TextView) meterView).setText(realAnswer + "");// + "FPS");
+        ((TextView) meterView).setText(realAnswer + "");
 
     }
 

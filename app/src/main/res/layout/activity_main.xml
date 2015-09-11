@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Start"
+            android:text="Show"
             android:textColor="@android:color/black"
             android:textSize="14sp"/>
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Stop"
+            android:text="Hide"
             android:textColor="@android:color/black"
             android:textSize="14sp"/>
 
