@@ -36,7 +36,7 @@ public class MeterPresenter {
 
         // grab window manager and add view to the window
         windowManager = (WindowManager) meterView.getContext().getSystemService(Service.WINDOW_SERVICE);
-        initView(meterView);
+        addViewToWindow(meterView);
     }
 
     private View createView(LayoutInflater layoutInflater) {
@@ -44,7 +44,7 @@ public class MeterPresenter {
         return view;
     }
 
-    private void initView(View view) {
+    private void addViewToWindow(View view) {
 
         WindowManager.LayoutParams paramsF = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -52,11 +52,17 @@ public class MeterPresenter {
                 WindowManager.LayoutParams.TYPE_PHONE,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
-        paramsF.gravity = Gravity.TOP | Gravity.START;
+
+        // configure starting coordinates
+        paramsF.gravity = fpsConfig.startingGravity;
         paramsF.x = fpsConfig.startingXPosition;
         paramsF.y = fpsConfig.startingYPosition;
+
+        // add view to the window
         windowManager.addView(view, paramsF);
-        setMeterListener(paramsF);
+
+        //attach touch listener
+        meterView.setOnTouchListener(new MeterTouchListener(paramsF, windowManager));
     }
 
     public void showData(FPSConfig fpsConfig, List<Long> dataSet) {
@@ -75,41 +81,8 @@ public class MeterPresenter {
         ((TextView) meterView).setText(answer.getValue() + "");
     }
 
-    private void setMeterListener(final WindowManager.LayoutParams paramsF) {
-        try {
-            //TODO: move this out to a separate class...maybe....
-            meterView.setOnTouchListener(new View.OnTouchListener() {
-                private int initialX;
-                private int initialY;
-                private float initialTouchX;
-                private float initialTouchY;
-
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            initialX = paramsF.x;
-                            initialY = paramsF.y;
-                            initialTouchX = event.getRawX();
-                            initialTouchY = event.getRawY();
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            paramsF.x = initialX + (int) (event.getRawX() - initialTouchX);
-                            paramsF.y = initialY + (int) (event.getRawY() - initialTouchY);
-                            windowManager.updateViewLayout(v, paramsF);
-                            break;
-                    }
-                    return false;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void destroy() {
+        meterView.setOnTouchListener(null);
         meterView.setVisibility(View.GONE);
         windowManager.removeView(meterView);
         meterView = null;

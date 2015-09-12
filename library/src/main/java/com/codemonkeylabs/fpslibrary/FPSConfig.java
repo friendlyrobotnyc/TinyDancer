@@ -1,5 +1,7 @@
 package com.codemonkeylabs.fpslibrary;
 
+import android.view.Gravity;
+
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +14,11 @@ public class FPSConfig implements Serializable
     public float yellowFlagPercentage = 0.05f; //
     public float refreshRate = 60; //60fps
     public float deviceRefreshRateInMs = 16.6f; //value from device ex 16.6 ms
+
+    // starting coordinates
     public int startingXPosition = 200;
     public int startingYPosition = 600;
+    public int startingGravity = Gravity.TOP | Gravity.START;
 
 
     // making final for now.....want to be solid on the math before we allow an
