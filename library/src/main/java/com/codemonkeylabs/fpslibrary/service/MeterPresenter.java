@@ -14,7 +14,6 @@ import com.codemonkeylabs.fpslibrary.FPSConfig;
 import com.codemonkeylabs.fpslibrary.R;
 
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class MeterPresenter {
