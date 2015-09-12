@@ -14,73 +14,65 @@ import com.codemonkeylabs.fpslibrary.FPSConfig;
 import com.codemonkeylabs.fpslibrary.FPSFrameCallback;
 import com.codemonkeylabs.fpslibrary.R;
 
-/**
- * Created by brianplummer on 8/29/15.
- */
-public class FPSService extends Service
-{
-    private FPSFrameCallback fpsFrameCallback = null;
-    private FPSMeterController fpsMeterController = null;
+public class FPSService extends Service {
+    public static final int IMAGE_PADDING = 30;
+    public static final int TEXT_SIZE = 23;
+    private FPSFrameCallback fpsFrameCallback;
+    private MeterPresenter meterPresenter;
     public static final String ARG_FPS_CONFIG = "ARG_FPS_CONFIG";
 
-    public void onCreate()
-    {
-        super.onCreate();
-    }
-
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
-        if (fpsFrameCallback != null || intent == null ||!intent.hasExtra(ARG_FPS_CONFIG)) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (fpsFrameCallback != null || intent == null || !intent.hasExtra(ARG_FPS_CONFIG)) {
             return super.onStartCommand(intent, flags, startId);
         }
 
-        // fetch config passed in from the builder
+        // fetch config from intent
         FPSConfig fpsConfig = (FPSConfig) intent.getSerializableExtra(ARG_FPS_CONFIG);
 
         //create and configure floating view
         TextView image = createFloatingView(fpsConfig);
 
-        // create the controller that updates the view
-        fpsMeterController = new FPSMeterController(image);
+        // create the presenter that updates the view
+        meterPresenter = new MeterPresenter(image);
 
         // create our choreographer callback and register it
-        fpsFrameCallback = new FPSFrameCallback(fpsConfig, fpsMeterController);
+        fpsFrameCallback = new FPSFrameCallback(fpsConfig, meterPresenter);
         Choreographer.getInstance().postFrameCallback(fpsFrameCallback);
 
         return super.onStartCommand(intent, flags, startId);
     }
 
     @NonNull
-    private TextView createFloatingView(FPSConfig fpsConfig)
-    {
+    private TextView createFloatingView(FPSConfig fpsConfig) {
         TextView image = new TextView(this);
-        image.setTextSize(TypedValue.COMPLEX_UNIT_SP, 23);
+        image.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         image.setTextColor(Color.BLACK);
         image.setText((int) fpsConfig.refreshRate + "");
-        image.setPadding(30,30,30,30);
+        image.setPadding(IMAGE_PADDING,
+                IMAGE_PADDING,
+                IMAGE_PADDING,
+                IMAGE_PADDING);
         image.setBackgroundResource(R.drawable.fpsmeterring_good);
         return image;
     }
 
     @Override
-    public void onDestroy()
-    {
-        // this removes the view from the window
-        fpsMeterController.destroy();
-        // this tells the callback to stop registering itself
+    public void onDestroy() {
+        // remove the view from the window
+        meterPresenter.destroy();
+        // tell callback to stop registering itself
         fpsFrameCallback.setEnabled(false);
 
         // paranoia cha-cha-cha
-        fpsMeterController = null;
+        meterPresenter = null;
         fpsFrameCallback = null;
         super.onDestroy();
     }
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent)
-    {
+    public IBinder onBind(Intent intent) {
         return null;
     }
 
