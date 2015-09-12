@@ -1,4 +1,4 @@
-package com.codemonkeylabs.fpslibrary.sample;
+package com.codemonkeylabs.fpslibrary.sample.UI;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.codemonkeylabs.fpslibrary.sample.R;
 
 /**
  * Created by brianplummer on 8/30/15.

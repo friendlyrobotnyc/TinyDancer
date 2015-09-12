@@ -1,9 +1,13 @@
-package com.codemonkeylabs.fpslibrary.sample;
+package com.codemonkeylabs.fpslibrary.sample.UI;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.codemonkeylabs.fpslibrary.sample.R;
+
+import javax.inject.Inject;
 
 /**
  * Created by brianplummer on 8/30/15.
@@ -12,6 +16,10 @@ public class FPSSampleAdpater extends RecyclerView.Adapter<FPSSampleViewHolder>
 {
 
     private float megaBytes = 5;
+
+    @Inject
+    public FPSSampleAdpater() {
+    }
 
     @Override
     public FPSSampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
