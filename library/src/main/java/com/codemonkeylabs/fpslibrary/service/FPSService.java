@@ -25,7 +25,7 @@ public class FPSService extends Service {
 
         @Override
         public void onBecameBackground() {
-            meterPresenter.hide();
+            meterPresenter.hide(false);
         }
     };
 
