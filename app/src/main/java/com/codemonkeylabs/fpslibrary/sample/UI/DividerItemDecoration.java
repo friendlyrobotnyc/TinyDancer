@@ -1,4 +1,4 @@
-package com.codemonkeylabs.fpslibrary.sample;
+package com.codemonkeylabs.fpslibrary.sample.UI;
 
 import android.content.Context;
 import android.content.res.TypedArray;
