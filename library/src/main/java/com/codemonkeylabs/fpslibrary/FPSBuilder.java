@@ -29,6 +29,7 @@ public class FPSBuilder
     }
 
     // PUBLIC BUILDER METHODS
+    //todo javadoc the shit out of these....
     public void show(Context context) {
         Intent intent = new Intent(context, FPSService.class);
         setFrameRate(context);
@@ -36,21 +37,29 @@ public class FPSBuilder
         context.startService(intent);
     }
 
-    public FPSBuilder sampleTime(long sampleTimeInMS){
+    // commented out for now...will add in later...don't touch ;)
+    /*public FPSBuilder sampleTime(long sampleTimeInMS){
         fpsConfig.sampleTimeInMs = sampleTimeInMS;
         return this;
-    }
+    }*/
 
-    public FPSBuilder redFlagPercentage(float percentage)
-    {
+    public FPSBuilder redFlagPercentage(float percentage) {
         fpsConfig.redFlagPercentage = percentage;
         return this;
     }
 
-    public FPSBuilder yellowFlagPercentage(float percentage)
-    {
+    public FPSBuilder yellowFlagPercentage(float percentage) {
         fpsConfig.yellowFlagPercentage = percentage;
         return this;
     }
 
+    public FPSBuilder startingXPosition(int xPosition) {
+        fpsConfig.startingXPosition = xPosition;
+        return this;
+    }
+
+    public FPSBuilder startingYPosition(int yPosition) {
+        fpsConfig.startingYPosition = yPosition;
+        return this;
+    }
 }
