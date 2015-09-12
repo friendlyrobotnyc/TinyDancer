@@ -1,14 +1,9 @@
 package com.codemonkeylabs.fpslibrary;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-/**
- * Created by brianplummer on 9/11/15.
- */
+//TODO: Clean this shit up, ugh is not a variable name :-)
 public class Calculation
 {
     public static List<Integer> getDroppedSet(FPSConfig fpsConfig, List<Long> dataSet)
@@ -27,7 +22,6 @@ public class Calculation
             long dev = Math.round(fpsConfig.deviceRefreshRateInMs);
             if (diffMs > dev) {
                 long ugh = (diffMs / dev);//(long)fpsConfig.deviceRefreshRateInMs);
-                //Log.e("#####", "BLAH::" + diffMs + ":" + ugh);
                 droppedSet.add((int)ugh);
             }
         }

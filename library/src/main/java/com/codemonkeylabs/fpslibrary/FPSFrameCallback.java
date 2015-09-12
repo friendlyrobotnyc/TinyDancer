@@ -2,7 +2,7 @@ package com.codemonkeylabs.fpslibrary;
 
 import android.view.Choreographer;
 
-import com.codemonkeylabs.fpslibrary.service.FPSMeterController;
+import com.codemonkeylabs.fpslibrary.service.MeterPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,15 @@ import java.util.List;
 public class FPSFrameCallback implements Choreographer.FrameCallback
 {
     private FPSConfig fpsConfig;
-    private FPSMeterController fpsMeterController;
+    private MeterPresenter meterPresenter;
     private List<Long> dataSet; //holds the frame times of the sample set
     private boolean enabled = true;
     private long startSampleTimeInNs = 0;
 
-    public FPSFrameCallback(FPSConfig fpsConfig, FPSMeterController fpsMeterController) {
+    public FPSFrameCallback(FPSConfig fpsConfig, MeterPresenter meterPresenter) {
         this.fpsConfig = fpsConfig;
-        this.fpsMeterController = fpsMeterController;
-        dataSet = new ArrayList<Long>();
+        this.meterPresenter = meterPresenter;
+        dataSet = new ArrayList<>();
     }
 
     public void setEnabled(boolean enabled) {
@@ -45,11 +45,11 @@ public class FPSFrameCallback implements Choreographer.FrameCallback
         //we have exceeded the sample length...we should push results and save current
         //frame time in new list
         if (frameTimeNanos-startSampleTimeInNs > fpsConfig.getSampleTimeInNs()){
-            List<Long> dataSetCopy = new ArrayList<Long>();
+            List<Long> dataSetCopy = new ArrayList<>();
             dataSetCopy.addAll(dataSet);
 
             //push data to the controller
-            fpsMeterController.showData(fpsConfig, dataSetCopy);
+            meterPresenter.showData(fpsConfig, dataSetCopy);
 
             // clear data
             dataSet.clear();
@@ -66,7 +66,7 @@ public class FPSFrameCallback implements Choreographer.FrameCallback
     {
         dataSet.clear();
         fpsConfig = null;
-        fpsMeterController = null;
+        meterPresenter = null;
     }
 
 }

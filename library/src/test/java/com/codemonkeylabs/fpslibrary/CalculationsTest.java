@@ -1,9 +1,5 @@
 package com.codemonkeylabs.fpslibrary;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -11,6 +7,8 @@ import org.junit.runners.JUnit4;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by brianplummer on 9/11/15.
