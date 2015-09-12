@@ -1,5 +1,6 @@
 package com.codemonkeylabs.fpslibrary.sample.UI;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.stop)
     public void stop() {
-        FPSLibrary.hide(getApplicationContext());
+        FPSLibrary.hide((Application) getApplicationContext());
         isShowing = false;
     }
 
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (isShowing) {
-            FPSLibrary.hide(getApplicationContext());
+            FPSLibrary.hide((Application) getApplicationContext());
         }
     }
 
