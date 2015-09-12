@@ -52,11 +52,13 @@ public class FPSService extends Service {
 
     @Override
     public void onDestroy() {
+
+        // tell callback to stop registering itself
+        fpsFrameCallback.setEnabled(false);
+
         Foreground.get(this).removeListener(foregroundListener);
         // remove the view from the window
         meterPresenter.destroy();
-        // tell callback to stop registering itself
-        fpsFrameCallback.setEnabled(false);
 
         // paranoia cha-cha-cha
         foregroundListener = null;

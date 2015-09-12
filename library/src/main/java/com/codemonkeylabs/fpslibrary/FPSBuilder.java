@@ -62,4 +62,9 @@ public class FPSBuilder
         fpsConfig.startingYPosition = yPosition;
         return this;
     }
+
+    public FPSBuilder startingGravity(int gravity) {
+        fpsConfig.startingGravity = gravity;
+        return this;
+    }
 }
