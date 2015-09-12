@@ -9,6 +9,6 @@ add to Gradle: TBD
 
 Add to onCreate of Application Class:
 
-FPSLibrary.create().show(getApplicationContext());
+```FPSLibrary.create().show(getApplicationContext());
 
 
