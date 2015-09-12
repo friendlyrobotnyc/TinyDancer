@@ -1,8 +1,10 @@
 package com.codemonkeylabs.fpslibrary.service;
 
+import android.app.Application;
 import android.app.Service;
 import android.graphics.PixelFormat;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +15,36 @@ import com.codemonkeylabs.fpslibrary.Calculation;
 import com.codemonkeylabs.fpslibrary.FPSConfig;
 import com.codemonkeylabs.fpslibrary.R;
 
+import java.util.AbstractMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MeterPresenter {
-    public static final int HORIZONTAL_MARGIN = 200;
-    public static final int VERTICAL_MARGIN = 600;
+
+    private FPSConfig fpsConfig;
     private View meterView;
     private final WindowManager windowManager;
 
-    public MeterPresenter(View meterView) {
-        this.meterView = meterView;
+    public MeterPresenter(Application context, FPSConfig config) {
+
+        fpsConfig = config;
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        //create and configure floating view
+        meterView = createView(inflater);
+        //set initial fps value....might change...
+        ((TextView) meterView).setText((int) fpsConfig.refreshRate + "");
+
+        // grab window manager and add view to the window
         windowManager = (WindowManager) meterView.getContext().getSystemService(Service.WINDOW_SERVICE);
-        initView();
+        initView(meterView);
     }
 
-    private void initView() {
+    private View createView(LayoutInflater layoutInflater) {
+        View view = layoutInflater.inflate(R.layout.meter_view, null);
+        return view;
+    }
+
+    private void initView(View view) {
 
         WindowManager.LayoutParams paramsF = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -37,56 +53,31 @@ public class MeterPresenter {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
         paramsF.gravity = Gravity.TOP | Gravity.START;
-        paramsF.x = HORIZONTAL_MARGIN;
-        paramsF.y = VERTICAL_MARGIN;
-        windowManager.addView(meterView, paramsF);
+        paramsF.x = fpsConfig.startingXPosition;
+        paramsF.y = fpsConfig.startingYPosition;
+        windowManager.addView(view, paramsF);
         setMeterListener(paramsF);
     }
 
     public void showData(FPSConfig fpsConfig, List<Long> dataSet) {
 
-
-        //metric
-        int runningOver = 0;
-        // total dropped
-        int dropped = 0;
-
         List<Integer> droppedSet = Calculation.getDroppedSet(fpsConfig, dataSet);
+        AbstractMap.SimpleEntry<Calculation.Metric, Long> answer = Calculation.calculateMetric(fpsConfig, dataSet, droppedSet);
 
-        for (Integer k : droppedSet) {
-            dropped += k;
-            if (k >= 2) {
-                runningOver += k;
-            }
-        }
-
-        long realSampleLengthNs = dataSet.get(dataSet.size() - 1) - dataSet.get(0);
-        long realSampleLengthMs = TimeUnit.MILLISECONDS.convert(realSampleLengthNs, TimeUnit.NANOSECONDS);
-        long size = (long) realSampleLengthMs / (long) fpsConfig.deviceRefreshRateInMs;
-
-        float multiplier = fpsConfig.refreshRate / size;
-        float answer = multiplier * (size - dropped);
-        long realAnswer = Math.round(answer);
-
-        // calculate metric
-        float percentOver = (float) runningOver / (float) size;
-
-        if (percentOver >= fpsConfig.redFlagPercentage) {
+        if (answer.getKey() == Calculation.Metric.BAD) {
             meterView.setBackgroundResource(R.drawable.fpsmeterring_bad);
-        } else if (percentOver >= fpsConfig.yellowFlagPercentage) {
+        } else if (answer.getKey() == Calculation.Metric.MEDIUM) {
             meterView.setBackgroundResource(R.drawable.fpsmeterring_medium);
         } else {
             meterView.setBackgroundResource(R.drawable.fpsmeterring_good);
         }
 
-        ((TextView) meterView).setText(realAnswer + "");
-
+        ((TextView) meterView).setText(answer.getValue() + "");
     }
-
 
     private void setMeterListener(final WindowManager.LayoutParams paramsF) {
         try {
-
+            //TODO: move this out to a separate class...maybe....
             meterView.setOnTouchListener(new View.OnTouchListener() {
                 private int initialX;
                 private int initialY;
