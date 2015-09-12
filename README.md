@@ -8,7 +8,6 @@ A tiny android library for displaying fps and percentage of time with two or mor
 add to Gradle: TBD
 
 Add to onCreate of Application Class:
-
-```FPSLibrary.create().show(getApplicationContext());
+`FPSLibrary.create().show(getApplicationContext());'
 
 
