@@ -115,4 +115,11 @@ public class MeterPresenter {
         meterView = null;
     }
 
+    public void show() {
+        meterView.setVisibility(View.VISIBLE);
+    }
+
+    public void hide () {
+        meterView.setVisibility(View.GONE);
+    }
 }

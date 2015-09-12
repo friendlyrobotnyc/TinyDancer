@@ -9,13 +9,26 @@ import android.view.Choreographer;
 
 import com.codemonkeylabs.fpslibrary.FPSConfig;
 import com.codemonkeylabs.fpslibrary.FPSFrameCallback;
+import com.codemonkeylabs.fpslibrary.Foreground;
 
 public class FPSService extends Service {
-    private FPSFrameCallback fpsFrameCallback;
-    private MeterPresenter meterPresenter;
+
     public static final String ARG_FPS_CONFIG = "ARG_FPS_CONFIG";
 
-    @Override
+    private FPSFrameCallback fpsFrameCallback;
+    private MeterPresenter meterPresenter;
+    private Foreground.Listener foregroundListener = new Foreground.Listener() {
+        @Override
+        public void onBecameForeground() {
+            meterPresenter.show();
+        }
+
+        @Override
+        public void onBecameBackground() {
+            meterPresenter.hide();
+        }
+    };
+
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (fpsFrameCallback != null || intent == null || !intent.hasExtra(ARG_FPS_CONFIG)) {
             return super.onStartCommand(intent, flags, startId);
@@ -31,17 +44,22 @@ public class FPSService extends Service {
         fpsFrameCallback = new FPSFrameCallback(fpsConfig, meterPresenter);
         Choreographer.getInstance().postFrameCallback(fpsFrameCallback);
 
+        //set activity background/foreground listener
+        Foreground.init(getApplication()).addListener(foregroundListener);
+
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onDestroy() {
+        Foreground.get(this).removeListener(foregroundListener);
         // remove the view from the window
         meterPresenter.destroy();
         // tell callback to stop registering itself
         fpsFrameCallback.setEnabled(false);
 
         // paranoia cha-cha-cha
+        foregroundListener = null;
         meterPresenter = null;
         fpsFrameCallback = null;
         super.onDestroy();

@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean isShowing = true;
     private AppComponent component;
 
     @Bind(R.id.radioGroup)
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupRadioGroup();
+        FPSLibrary.create().show(getApplicationContext());
     }
 
     private void setupRadioGroup() {
@@ -54,13 +54,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.start)
     public void start() {
         FPSLibrary.create().show(getApplicationContext());
-        isShowing = true;
     }
 
     @OnClick(R.id.stop)
     public void stop() {
         FPSLibrary.hide((Application) getApplicationContext());
-        isShowing = false;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,17 +85,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (isShowing) {
-            FPSLibrary.create().show(getApplicationContext());
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (isShowing) {
-            FPSLibrary.hide((Application) getApplicationContext());
-        }
     }
 
     @Override
