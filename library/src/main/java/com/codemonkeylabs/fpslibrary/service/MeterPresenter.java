@@ -1,11 +1,10 @@
 package com.codemonkeylabs.fpslibrary.service;
 
+import android.animation.Animator;
 import android.app.Application;
 import android.app.Service;
 import android.graphics.PixelFormat;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,8 +22,14 @@ public class MeterPresenter {
     private FPSConfig fpsConfig;
     private View meterView;
     private final WindowManager windowManager;
+    private int shortAnimationDuration, longAnimationDuration;
 
     public MeterPresenter(Application context, FPSConfig config) {
+
+        shortAnimationDuration = context.getResources().getInteger(
+                android.R.integer.config_shortAnimTime);
+
+        longAnimationDuration = 700; //700ms
 
         fpsConfig = config;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -63,6 +68,9 @@ public class MeterPresenter {
 
         //attach touch listener
         meterView.setOnTouchListener(new MeterTouchListener(paramsF, windowManager));
+
+        // show the meter
+        show();
     }
 
     public void showData(FPSConfig fpsConfig, List<Long> dataSet) {
@@ -83,16 +91,40 @@ public class MeterPresenter {
 
     public void destroy() {
         meterView.setOnTouchListener(null);
-        meterView.setVisibility(View.GONE);
-        windowManager.removeView(meterView);
-        meterView = null;
+        hide(true);
     }
 
     public void show() {
+        meterView.setAlpha(0f);
         meterView.setVisibility(View.VISIBLE);
+        meterView.animate()
+                .alpha(1f)
+                .setDuration(longAnimationDuration)
+                .setListener(null);
     }
 
-    public void hide () {
-        meterView.setVisibility(View.GONE);
+    public void hide (final boolean remove) {
+        meterView.animate()
+                .alpha(0f)
+                .setDuration(shortAnimationDuration)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {}
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        meterView.setVisibility(View.GONE);
+                        if (remove) {
+                            windowManager.removeView(meterView);
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {}
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {}
+        });
+
     }
 }
