@@ -22,31 +22,21 @@ public class MeterPresenter {
     private FPSConfig fpsConfig;
     private View meterView;
     private final WindowManager windowManager;
-    private int shortAnimationDuration, longAnimationDuration;
+    private int shortAnimationDuration = 200, longAnimationDuration = 700;
 
     public MeterPresenter(Application context, FPSConfig config) {
 
-        shortAnimationDuration = context.getResources().getInteger(
-                android.R.integer.config_shortAnimTime);
-
-        longAnimationDuration = 700; //700ms
-
         fpsConfig = config;
-        LayoutInflater inflater = LayoutInflater.from(context);
 
-        //create and configure floating view
-        meterView = createView(inflater);
+        //create meter view
+        meterView = LayoutInflater.from(context).inflate(R.layout.meter_view, null);
+
         //set initial fps value....might change...
         ((TextView) meterView).setText((int) fpsConfig.refreshRate + "");
 
         // grab window manager and add view to the window
         windowManager = (WindowManager) meterView.getContext().getSystemService(Service.WINDOW_SERVICE);
         addViewToWindow(meterView);
-    }
-
-    private View createView(LayoutInflater layoutInflater) {
-        View view = layoutInflater.inflate(R.layout.meter_view, null);
-        return view;
     }
 
     private void addViewToWindow(View view) {
