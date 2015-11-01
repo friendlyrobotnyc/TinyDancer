@@ -4,8 +4,6 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-//TODO: Clean this shit up, ugh is not a variable name :-)
-//todo word....agreed....will do... :)
 public class Calculation
 {
     public enum Metric {GOOD, BAD, MEDIUM};
@@ -25,8 +23,9 @@ public class Calculation
             long diffMs = TimeUnit.MILLISECONDS.convert(diffNs, TimeUnit.NANOSECONDS);
             long dev = Math.round(fpsConfig.deviceRefreshRateInMs);
             if (diffMs > dev) {
-                long ugh = (diffMs / dev);//(long)fpsConfig.deviceRefreshRateInMs);
-                droppedSet.add((int)ugh);
+                
+                long droppedCount = (diffMs / dev);
+                droppedSet.add((int) droppedCount);
             }
         }
         return droppedSet;
