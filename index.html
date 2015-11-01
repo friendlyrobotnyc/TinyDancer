@@ -55,7 +55,7 @@
 					</div>
 				</div><br><br>
 				<!-- REPLACE WITH YOUR APP DESCRIPTION -->
-				<span class="text-description" style="font-size: 1.1em"> Last Droidcon Facebook gave a talk about measuring app performance (https://www.youtube.com/watch?v=xg2CH4aV2Fo).  In a similar manner to Leak Canary, we wanted to allow apps to
+				<span class="text-description" style="font-size: 1.1em"> Last Droidcon Facebook gave a talk about measuring app performance (https://www.youtube.com/watch?v=xg2CH4aV2Fo).  In a similar manner to how  Leak Canary brought leak detection to apps at runtime, we wanted to allow apps to see FPS during normal app execution.
 			</div>
 
 
@@ -94,15 +94,14 @@
 				
 				<div class="detail-item">
 				<iron-icon class="details-icon" icon="android"></iron-icon>
-					Show: FPSLibrary.create().show(getApplicationContext());
 
-				</div>
-				
-				
-				<div class="detail-item">
-				<iron-icon class="details-icon" icon="android"></iron-icon>
+					To Show the FPS Meter:
 
-					Hide: FPSLibrary.hide((Application) getApplicationContext());
+					FPSLibrary.create().show(getApplicationContext());
+
+					To Hide the FPS Meter:
+
+					FPSLibrary.hide((Application) getApplicationContext());
 
 				</div>
 				
