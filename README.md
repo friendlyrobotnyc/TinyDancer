@@ -11,6 +11,6 @@ Add to onCreate of Application Class:
 
 `FPSLibrary.create().show(getApplicationContext());`
 
-And to hide th button programmatically you can:
+And to hide the button programmatically you can:
 
 `FPSLibrary.hide((Application) getApplicationContext());`
