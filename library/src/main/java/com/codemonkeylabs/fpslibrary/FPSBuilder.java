@@ -18,18 +18,33 @@ public class FPSBuilder
         fpsConfig = new FPSConfig();
     }
 
+    /**
+     * configures the fpsConfig to the device's hardware
+     * refreshRate ex. 60fps and deviceRefreshRateInMs ex. 16.6ms
+     * @param context
+     */
     private void setFrameRate(Context context){
         Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         fpsConfig.deviceRefreshRateInMs = 1000f/display.getRefreshRate();
         fpsConfig.refreshRate = display.getRefreshRate();
     }
 
+    /**
+     * stops the FPSService and "hides" the meter
+     * called from FPSLibrary in a static context
+     * @param context
+     */
     protected static void hide(Context context) {
         context.stopService(new Intent(context, FPSService.class));
     }
 
     // PUBLIC BUILDER METHODS
-    //todo javadoc the shit out of these....
+
+    /**
+     * show fps meter, this starts the background service that
+     * collects the fps info and pushes it to the ui
+     * @param context
+     */
     public void show(Context context) {
         Intent intent = new Intent(context, FPSService.class);
         setFrameRate(context);
@@ -37,32 +52,52 @@ public class FPSBuilder
         context.startService(intent);
     }
 
-    // commented out for now...will add in later...don't touch ;)
-    /*public FPSBuilder sampleTime(long sampleTimeInMS){
-        fpsConfig.sampleTimeInMs = sampleTimeInMS;
-        return this;
-    }*/
-
+    /**
+     *  set red flag percent, default is 20%
+     *
+     * @param percentage
+     * @return
+     */
     public FPSBuilder redFlagPercentage(float percentage) {
         fpsConfig.redFlagPercentage = percentage;
         return this;
     }
 
+    /**
+     * set red flag percent, default is 5%
+     * @param percentage
+     * @return
+     */
     public FPSBuilder yellowFlagPercentage(float percentage) {
         fpsConfig.yellowFlagPercentage = percentage;
         return this;
     }
 
+    /**
+     * starting x position of fps meter default is 200px
+     * @param xPosition
+     * @return
+     */
     public FPSBuilder startingXPosition(int xPosition) {
         fpsConfig.startingXPosition = xPosition;
         return this;
     }
 
+    /**
+     * starting y positon of fps meter default is 600px
+     * @param yPosition
+     * @return
+     */
     public FPSBuilder startingYPosition(int yPosition) {
         fpsConfig.startingYPosition = yPosition;
         return this;
     }
 
+    /**
+     * starting gravity of fps meter default is Gravity.TOP | Gravity.START;
+     * @param gravity
+     * @return
+     */
     public FPSBuilder startingGravity(int gravity) {
         fpsConfig.startingGravity = gravity;
         return this;

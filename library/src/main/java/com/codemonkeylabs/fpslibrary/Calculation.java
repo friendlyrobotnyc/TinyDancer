@@ -31,12 +31,12 @@ public class Calculation
         return droppedSet;
     }
 
-    public static AbstractMap.SimpleEntry<Metric, Long> calculateMetric(FPSConfig fpsConfig, List<Long> dataSet, List<Integer> droppedSet) {
-        Metric metric = Metric.GOOD;
-
-        long realSampleLengthNs = dataSet.get(dataSet.size()-1) - dataSet.get(0);
-        long realSampleLengthMs = TimeUnit.MILLISECONDS.convert(realSampleLengthNs, TimeUnit.NANOSECONDS);
-        long size = (long) realSampleLengthMs/(long) fpsConfig.deviceRefreshRateInMs;
+    public static AbstractMap.SimpleEntry<Metric, Long> calculateMetric(FPSConfig fpsConfig,
+                                                                        List<Long> dataSet,
+                                                                        List<Integer> droppedSet)
+    {
+        long timeInNS = dataSet.get(dataSet.size() - 1) - dataSet.get(0);
+        long size = getNumberOfFramesInSet(timeInNS, fpsConfig);
 
         //metric
         int runningOver = 0;
@@ -56,7 +56,7 @@ public class Calculation
 
         // calculate metric
         float percentOver = (float)runningOver/(float)size;
-
+        Metric metric = Metric.GOOD;
         if (percentOver >= fpsConfig.redFlagPercentage) {
             metric = Metric.BAD;
         } else if (percentOver >= fpsConfig.yellowFlagPercentage) {
@@ -66,5 +66,11 @@ public class Calculation
         return new AbstractMap.SimpleEntry<Metric, Long>(metric, realAnswer);
     }
 
+    protected static long getNumberOfFramesInSet(long realSampleLengthNs, FPSConfig fpsConfig)
+    {
+        float realSampleLengthMs = TimeUnit.MILLISECONDS.convert(realSampleLengthNs, TimeUnit.NANOSECONDS);
+        float size =  realSampleLengthMs/fpsConfig.deviceRefreshRateInMs;
+        return Math.round(size);
+    }
 
 }

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupRadioGroup() {
-        radioGroup.check(R.id.defaultFive);
+        radioGroup.check(R.id.defaultValue);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

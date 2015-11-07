@@ -54,32 +54,32 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.0"/>
+                android:text="0.2"/>
 
             <RadioButton
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"/>
+                android:id="@+id/defaultValue"
+                android:text="1"/>
 
             <RadioButton
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/defaultFive"
-                android:text="5"/>
+                android:text="2"/>
 
             <RadioButton
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"/>
+                android:text="4"/>
 
             <RadioButton
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15"/>
+                android:text="7"/>
 
         </RadioGroup>
 

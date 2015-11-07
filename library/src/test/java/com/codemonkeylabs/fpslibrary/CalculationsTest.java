@@ -17,6 +17,8 @@ import static org.junit.Assert.assertTrue;
 public class CalculationsTest
 {
 
+    private long oneFrameNS = 16600000;
+
     @Test
     public void testBaseCase()
     {
@@ -28,4 +30,38 @@ public class CalculationsTest
         assertTrue(droppedSet.size() == 1);
         assertTrue(droppedSet.get(0) == 2);
     }
+
+    @Test
+    public void testBaseGetAmountOfFramesInSet()
+    {
+        FPSConfig fpsConfig = new FPSConfig();
+        assertTrue(Calculation.getNumberOfFramesInSet(oneFrameNS, fpsConfig) == 1);
+        assertTrue(Calculation.getNumberOfFramesInSet(oneFrameNS * 5, fpsConfig) == 5);
+        assertTrue(Calculation.getNumberOfFramesInSet(oneFrameNS * 58,fpsConfig) == 58);
+    }
+
+    @Test
+    public void testCalculateMetric()
+    {
+        FPSConfig fpsConfig = new FPSConfig();
+        long start = 0;
+        long end = oneFrameNS * 100;
+        assertTrue(Calculation.getNumberOfFramesInSet(end, fpsConfig) == 100);
+
+        List<Long> dataSet = new ArrayList<>();
+        dataSet.add(start);
+        dataSet.add(end);
+
+        List<Integer> droppedSet = new ArrayList<>();
+
+        droppedSet.add(4);
+        assertTrue(Calculation.calculateMetric(fpsConfig, dataSet, droppedSet).getKey() == Calculation.Metric.GOOD);
+
+        droppedSet.add(6);
+        assertTrue(Calculation.calculateMetric(fpsConfig, dataSet, droppedSet).getKey() == Calculation.Metric.MEDIUM);
+
+        droppedSet.add(10);
+        assertTrue(Calculation.calculateMetric(fpsConfig, dataSet, droppedSet).getKey() == Calculation.Metric.BAD);
+    }
+
 }
