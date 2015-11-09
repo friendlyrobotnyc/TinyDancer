@@ -7,12 +7,12 @@ import android.app.Application;
  */
 public class TinyDancer
 {
-    public static FPSBuilder create(){
-        return new FPSBuilder();
+    public static TinyDancerBuilder create(){
+        return new TinyDancerBuilder();
     }
 
     public static void hide(Application context) {
-        FPSBuilder.hide(context);
+        TinyDancerBuilder.hide(context);
     }
 
 }

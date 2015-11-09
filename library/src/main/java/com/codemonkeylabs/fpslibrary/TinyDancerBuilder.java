@@ -10,11 +10,11 @@ import com.codemonkeylabs.fpslibrary.service.FPSService;
 /**
  * Created by brianplummer on 8/29/15.
  */
-public class FPSBuilder
+public class TinyDancerBuilder
 {
     private FPSConfig fpsConfig;
 
-    protected FPSBuilder(){
+    protected TinyDancerBuilder(){
         fpsConfig = new FPSConfig();
     }
 
@@ -58,7 +58,7 @@ public class FPSBuilder
      * @param percentage
      * @return
      */
-    public FPSBuilder redFlagPercentage(float percentage) {
+    public TinyDancerBuilder redFlagPercentage(float percentage) {
         fpsConfig.redFlagPercentage = percentage;
         return this;
     }
@@ -68,7 +68,7 @@ public class FPSBuilder
      * @param percentage
      * @return
      */
-    public FPSBuilder yellowFlagPercentage(float percentage) {
+    public TinyDancerBuilder yellowFlagPercentage(float percentage) {
         fpsConfig.yellowFlagPercentage = percentage;
         return this;
     }
@@ -78,7 +78,7 @@ public class FPSBuilder
      * @param xPosition
      * @return
      */
-    public FPSBuilder startingXPosition(int xPosition) {
+    public TinyDancerBuilder startingXPosition(int xPosition) {
         fpsConfig.startingXPosition = xPosition;
         return this;
     }
@@ -88,7 +88,7 @@ public class FPSBuilder
      * @param yPosition
      * @return
      */
-    public FPSBuilder startingYPosition(int yPosition) {
+    public TinyDancerBuilder startingYPosition(int yPosition) {
         fpsConfig.startingYPosition = yPosition;
         return this;
     }
@@ -98,7 +98,7 @@ public class FPSBuilder
      * @param gravity
      * @return
      */
-    public FPSBuilder startingGravity(int gravity) {
+    public TinyDancerBuilder startingGravity(int gravity) {
         fpsConfig.startingGravity = gravity;
         return this;
     }
