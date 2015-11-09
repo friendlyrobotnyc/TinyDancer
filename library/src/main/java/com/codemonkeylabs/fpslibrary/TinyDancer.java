@@ -5,7 +5,7 @@ import android.app.Application;
 /**
  * Created by brianplummer on 8/29/15.
  */
-public class FPSLibrary
+public class TinyDancer
 {
     public static FPSBuilder create(){
         return new FPSBuilder();

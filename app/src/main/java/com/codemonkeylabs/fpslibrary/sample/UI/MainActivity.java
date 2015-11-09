@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.codemonkeylabs.fpslibrary.FPSLibrary;
+import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.codemonkeylabs.fpslibrary.sample.AppComponent;
 import com.codemonkeylabs.fpslibrary.sample.FPSApplication;
 import com.codemonkeylabs.fpslibrary.sample.R;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupRadioGroup();
-        FPSLibrary.create().show(getApplicationContext());
+        TinyDancer.create().show(getApplicationContext());
     }
 
     private void setupRadioGroup() {
@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.start)
     public void start() {
-        FPSLibrary.create().show(getApplicationContext());
+        TinyDancer.create().show(getApplicationContext());
     }
 
     @OnClick(R.id.stop)
     public void stop() {
-        FPSLibrary.hide((Application) getApplicationContext());
+        TinyDancer.hide((Application) getApplicationContext());
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
