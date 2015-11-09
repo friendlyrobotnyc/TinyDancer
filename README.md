@@ -11,6 +11,6 @@ Add to onCreate of Application Class:
 
 `TinyDancer.create().show(getApplicationContext());`
 
-And to hide th button programmatically you can:
+And to hide the button programmatically you can:
 
 `TinyDancer.hide((Application) getApplicationContext());`
