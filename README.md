@@ -14,3 +14,8 @@ Add to onCreate of Application Class:
 And to hide the button programmatically you can:
 
 `TinyDancer.hide((Application) getApplicationContext());`
+
+We have included a sample application that simulates excessive bind time:
+
+![Tiny Dancer Sample](http://i.imgur.com/iJxzr01.png "Tiny Dancer Sample")
+
