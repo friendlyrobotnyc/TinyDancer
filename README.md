@@ -12,7 +12,7 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   compile 'com.github.brianPlummer:TinyDancer:0.0.1'
+   compile 'com.github.brianPlummer:tinydancer:0.0.1'
  }
 ```
 
