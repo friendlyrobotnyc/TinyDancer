@@ -25,13 +25,13 @@ public class DebugApplication extends Application {
    TinyDancer.create()
              .show(this);
              
-             //alternatively
-             new TinyDancerBuilder()
-                .redFlagPercentage(10)
-                .startingGravity()
-                .startingXPosition()
-                .startingYPosition()
-                .show(this);
+   //alternatively
+   new TinyDancerBuilder()
+      .redFlagPercentage(10)
+      .startingGravity()
+      .startingXPosition()
+      .startingYPosition()
+      .show(this);
   }
 }
 ```
