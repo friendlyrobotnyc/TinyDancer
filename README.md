@@ -12,19 +12,26 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   compile 'com.github.brianPlummer:tinydancer:0.0.1'
+   debugCompile 'com.github.brianPlummer:tinydancer:0.0.1'
  }
 ```
 
-In your `Application` class:
+In your `DebugApplication` class:
 
 ```java
-public class ExampleApplication extends Application {
+public class DebugApplication extends Application {
 
   @Override public void onCreate() {
    TinyDancer.create()
-            //TODO:  other builder things 
-             .show(getApplicationContext());
+             .show(this);
+             
+             //alternatively
+             new TinyDancerBuilder()
+                .redFlagPercentage(10)
+                .startingGravity()
+                .startingXPosition()
+                .startingYPosition()
+                .show(this);
   }
 }
 ```
