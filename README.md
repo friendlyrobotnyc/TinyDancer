@@ -4,7 +4,7 @@ A real time frames per second measuring library for Android that also shows a co
 
 *“Perf Matters ”* - Random Guy at Meetup
 
-![Tiny Dancer](http://i.ytimg.com/vi/KBWfUc5jKiM/hqdefault.jpg "Tiny Dancer")
+![Tiny Dancer](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tinydancer2.png "Tiny Dancer")
 
 ## Getting started
 
