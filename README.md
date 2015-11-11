@@ -1,21 +1,48 @@
 # Tiny Dancer
 
+A real time frames per second measuring library for Android 
+
+*“Perf Matters ”* - Random Guy at Meetup
 
 ![Tiny Dancer](http://i.ytimg.com/vi/KBWfUc5jKiM/hqdefault.jpg "Tiny Dancer")
 
-A tiny android library for displaying fps and percentage of time with two or more frames dropped
+## Getting started
 
-add to Gradle: TBD
+In your `build.gradle`:
 
-Add to onCreate of Application Class:
+```gradle
+ dependencies {
+   debugCompile 'com.github.brianPlummer:tinydancer:0.0.1'
+ }
+```
 
-`TinyDancer.create().show(getApplicationContext());`
+In your `DebugApplication` class:
 
-And to hide the button programmatically you can:
+```java
+public class DebugApplication extends Application {
 
-`TinyDancer.hide((Application) getApplicationContext());`
+  @Override public void onCreate() {
+   TinyDancer.create()
+             .show(this);
+             
+   //alternatively
+   new TinyDancerBuilder()
+      .redFlagPercentage(10)
+      .startingGravity()
+      .startingXPosition()
+      .startingYPosition()
+      .show(this);
+  }
+}
+```
 
-We have included a sample application that simulates excessive bind time:
+**You're good to go!** Tiny Dancer will show a small draggable view overlay with FPS as well as a color indicator of when FPS drop.
+
+
+
+
+
+See sample application that simulates excessive bind time
 
 ![Tiny Dancer Sample](http://i.imgur.com/iJxzr01.png "Tiny Dancer Sample")
 
