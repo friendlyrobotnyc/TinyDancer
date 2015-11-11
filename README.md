@@ -44,5 +44,5 @@ public class DebugApplication extends Application {
 
 See sample application that simulates excessive bind time
 
-![Tiny Dancer Sample](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tindancer1.png "Tiny Dancer Sample")
+![Tiny Dancer Sample](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tinydancer1.gif "Tiny Dancer Sample")
 
