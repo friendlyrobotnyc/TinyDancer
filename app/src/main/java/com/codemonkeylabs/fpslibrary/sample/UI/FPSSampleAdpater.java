@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class FPSSampleAdpater extends RecyclerView.Adapter<FPSSampleViewHolder>
 {
 
-    private float megaBytes = 5;
+    private float megaBytes = 1;
 
     @Inject
     public FPSSampleAdpater() {
