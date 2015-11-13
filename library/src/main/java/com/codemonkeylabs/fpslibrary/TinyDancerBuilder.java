@@ -1,21 +1,36 @@
 package com.codemonkeylabs.fpslibrary;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.view.Choreographer;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.codemonkeylabs.fpslibrary.service.FPSService;
+import com.codemonkeylabs.fpslibrary.ui.MeterPresenter;
 
 /**
  * Created by brianplummer on 8/29/15.
  */
 public class TinyDancerBuilder
 {
-    private FPSConfig fpsConfig;
+    private static FPSConfig fpsConfig;
+    private static FPSFrameCallback fpsFrameCallback;
+    private static MeterPresenter meterPresenter;
+    private static Foreground.Listener foregroundListener = new Foreground.Listener() {
+        @Override
+        public void onBecameForeground() {
+            meterPresenter.show();
+        }
+
+        @Override
+        public void onBecameBackground() {
+            meterPresenter.hide(false);
+        }
+    };
 
     protected TinyDancerBuilder(){
         fpsConfig = new FPSConfig();
@@ -33,18 +48,29 @@ public class TinyDancerBuilder
     }
 
     /**
-     * stops the FPSService and "hides" the meter
+     * stops the frame callback and foreground listener
+     * nulls out static variables
      * called from FPSLibrary in a static context
      * @param context
      */
     protected static void hide(Context context) {
-        context.stopService(new Intent(context, FPSService.class));
+        // tell callback to stop registering itself
+        fpsFrameCallback.setEnabled(false);
+
+        Foreground.get(context).removeListener(foregroundListener);
+        // remove the view from the window
+        meterPresenter.destroy();
+
+        // null it all out
+        meterPresenter = null;
+        fpsFrameCallback = null;
+        fpsConfig = null;
     }
 
     // PUBLIC BUILDER METHODS
 
     /**
-     * show fps meter, this starts the background service that
+     * show fps meter, this regisers the frame callback that
      * collects the fps info and pushes it to the ui
      * @param context
      */
@@ -55,10 +81,35 @@ public class TinyDancerBuilder
             return;
         }
 
-        Intent intent = new Intent(context, FPSService.class);
+        //are we running?  if so, just return and ignore
+        if (meterPresenter != null) {
+            return;
+        }
+
+        // set device's frame rate info into the config
         setFrameRate(context);
-        intent.putExtra(FPSService.ARG_FPS_CONFIG, fpsConfig);
-        context.startService(intent);
+
+        // create the presenter that updates the view
+        meterPresenter = new MeterPresenter((Application) context.getApplicationContext(), fpsConfig);
+
+        // create our choreographer callback and register it
+        fpsFrameCallback = new FPSFrameCallback(fpsConfig, meterPresenter);
+        Choreographer.getInstance().postFrameCallback(fpsFrameCallback);
+
+        //set activity background/foreground listener
+        Foreground.init((Application) context.getApplicationContext()).addListener(foregroundListener);
+    }
+
+    /**
+     * this adds a frame callback that the library will invoke on the
+     * each time the choreographer calls us, we will send you the frame times
+     * and number of dropped frames.
+     * @param callback
+     * @return
+     */
+    public TinyDancerBuilder addFrameDataCallback(FrameDataCallback callback) {
+        fpsConfig.frameDataCallback = callback;
+        return this;
     }
 
     /**
@@ -132,4 +183,5 @@ public class TinyDancerBuilder
         }
         return permNeeded;
     }
+
 }

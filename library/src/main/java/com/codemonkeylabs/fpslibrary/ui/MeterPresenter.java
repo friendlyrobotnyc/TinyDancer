@@ -1,4 +1,4 @@
-package com.codemonkeylabs.fpslibrary.service;
+package com.codemonkeylabs.fpslibrary.ui;
 
 import android.animation.Animator;
 import android.app.Application;

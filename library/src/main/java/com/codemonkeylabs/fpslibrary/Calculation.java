@@ -18,17 +18,28 @@ public class Calculation
                 continue;
             }
 
-            long diffNs = value - start;
-            start = value;
-            long diffMs = TimeUnit.MILLISECONDS.convert(diffNs, TimeUnit.NANOSECONDS);
-            long dev = Math.round(fpsConfig.deviceRefreshRateInMs);
-            if (diffMs > dev) {
-                
-                long droppedCount = (diffMs / dev);
-                droppedSet.add((int) droppedCount);
+            int droppedCount = droppedCount(start, value, fpsConfig.deviceRefreshRateInMs);
+            if (droppedCount > 0)
+            {
+                droppedSet.add(droppedCount);
             }
+            start = value;
         }
         return droppedSet;
+    }
+
+    public static int droppedCount(long start, long end, float devRefreshRate){
+        int count = 0;
+        long diffNs = end - start;
+
+        long diffMs = TimeUnit.MILLISECONDS.convert(diffNs, TimeUnit.NANOSECONDS);
+        long dev = Math.round(devRefreshRate);
+        if (diffMs > dev) {
+            long droppedCount = (diffMs / dev);
+            count = (int) droppedCount;
+        }
+
+        return count;
     }
 
     public static AbstractMap.SimpleEntry<Metric, Long> calculateMetric(FPSConfig fpsConfig,

@@ -20,6 +20,8 @@ public class FPSConfig implements Serializable
     public int startingYPosition = 600;
     public int startingGravity = Gravity.TOP | Gravity.START;
 
+    // client facing callback that provides frame info
+    public FrameDataCallback frameDataCallback = null;
 
     // making final for now.....want to be solid on the math before we allow an
     // arbitrary value

@@ -41,9 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRadioGroup() {
         radioGroup.check(R.id.defaultValue);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        // set initial value
+        RadioButton button = ButterKnife.findById(radioGroup, R.id.defaultValue);
+        recyclerView.setMegaBytes(Float.valueOf(button.getText().toString()));
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            public void onCheckedChanged(RadioGroup radioGroup, int i)
+            {
                 RadioButton button = ButterKnife.findById(radioGroup, i);
                 recyclerView.setMegaBytes(Float.valueOf(button.getText().toString()));
                 recyclerView.notifyDataSetChanged();

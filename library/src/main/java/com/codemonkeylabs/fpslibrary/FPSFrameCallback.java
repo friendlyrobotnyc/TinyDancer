@@ -2,7 +2,7 @@ package com.codemonkeylabs.fpslibrary;
 
 import android.view.Choreographer;
 
-import com.codemonkeylabs.fpslibrary.service.MeterPresenter;
+import com.codemonkeylabs.fpslibrary.ui.MeterPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,25 +41,52 @@ public class FPSFrameCallback implements Choreographer.FrameCallback
         if (startSampleTimeInNs == 0){
             startSampleTimeInNs = frameTimeNanos;
         }
-
-        //we have exceeded the sample length...we should push results and save current
-        //frame time in new list
-        if (frameTimeNanos-startSampleTimeInNs > fpsConfig.getSampleTimeInNs()){
-            List<Long> dataSetCopy = new ArrayList<>();
-            dataSetCopy.addAll(dataSet);
-
-            //push data to the controller
-            meterPresenter.showData(fpsConfig, dataSetCopy);
-
-            // clear data
-            dataSet.clear();
-            //reset sample timer to last frame
-            startSampleTimeInNs = frameTimeNanos;
+        // only invoked for callbacks....
+        else if (fpsConfig.frameDataCallback != null)
+        {
+            long start = dataSet.get(dataSet.size()-1);
+            int droppedCount = Calculation.droppedCount(start, frameTimeNanos, fpsConfig.deviceRefreshRateInMs);
+            fpsConfig.frameDataCallback.doFrame(start, frameTimeNanos, droppedCount);
         }
+
+        //we have exceeded the sample length ~700ms worth of data...we should push results and save current
+        //frame time in new list
+        if (isFinishedWithSample(frameTimeNanos))
+        {
+            collectSampleAndSend(frameTimeNanos);
+        }
+
+        // add current frame time to our list
         dataSet.add(frameTimeNanos);
 
         //we need to register for the next frame callback
         Choreographer.getInstance().postFrameCallback(this);
+    }
+
+    private void collectSampleAndSend(long frameTimeNanos)
+    {
+        //this occurs only when we have gathered over the sample time ~700ms
+        List<Long> dataSetCopy = new ArrayList<>();
+        dataSetCopy.addAll(dataSet);
+
+        //push data to the controller
+        meterPresenter.showData(fpsConfig, dataSetCopy);
+
+        // clear data
+        dataSet.clear();
+
+        //reset sample timer to last frame
+        startSampleTimeInNs = frameTimeNanos;
+    }
+
+    /**
+     * returns true if we have exceeded our sample length
+     * @param frameTimeNanos current frame time in NS
+     * @return
+     */
+    private boolean isFinishedWithSample(long frameTimeNanos)
+    {
+        return frameTimeNanos-startSampleTimeInNs > fpsConfig.getSampleTimeInNs();
     }
 
     private void destroy()
