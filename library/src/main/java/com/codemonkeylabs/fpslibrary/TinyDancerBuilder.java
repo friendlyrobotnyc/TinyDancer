@@ -2,6 +2,9 @@ package com.codemonkeylabs.fpslibrary;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -46,6 +49,12 @@ public class TinyDancerBuilder
      * @param context
      */
     public void show(Context context) {
+
+        if (overlayPermRequest(context)) {
+            //once permission is granted then you must call show() again
+            return;
+        }
+
         Intent intent = new Intent(context, FPSService.class);
         setFrameRate(context);
         intent.putExtra(FPSService.ARG_FPS_CONFIG, fpsConfig);
@@ -101,5 +110,26 @@ public class TinyDancerBuilder
     public TinyDancerBuilder startingGravity(int gravity) {
         fpsConfig.startingGravity = gravity;
         return this;
+    }
+
+    /**
+     * request overlay permission when api >= 23
+     * @param context
+     * @return
+     */
+    private boolean overlayPermRequest(Context context) {
+        boolean permNeeded = false;
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (!Settings.canDrawOverlays(context))
+            {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + context.getPackageName()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                permNeeded = true;
+            }
+        }
+        return permNeeded;
     }
 }
