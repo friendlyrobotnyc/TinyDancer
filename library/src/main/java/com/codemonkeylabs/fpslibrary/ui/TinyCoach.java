@@ -17,14 +17,15 @@ import com.codemonkeylabs.fpslibrary.R;
 import java.util.AbstractMap;
 import java.util.List;
 
-public class MeterPresenter {
+public class TinyCoach
+{
 
     private FPSConfig fpsConfig;
     private View meterView;
     private final WindowManager windowManager;
     private int shortAnimationDuration = 200, longAnimationDuration = 700;
 
-    public MeterPresenter(Application context, FPSConfig config) {
+    public TinyCoach(Application context, FPSConfig config) {
 
         fpsConfig = config;
 
@@ -57,7 +58,7 @@ public class MeterPresenter {
         windowManager.addView(view, paramsF);
 
         //attach touch listener
-        meterView.setOnTouchListener(new MeterTouchListener(paramsF, windowManager));
+        meterView.setOnTouchListener(new DancerTouchListener(paramsF, windowManager));
 
         // show the meter
         show();

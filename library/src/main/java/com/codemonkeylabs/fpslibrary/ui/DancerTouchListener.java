@@ -7,7 +7,7 @@ import android.view.WindowManager;
 /**
  * Created by brianplummer on 9/12/15.
  */
-public class MeterTouchListener implements View.OnTouchListener {
+public class DancerTouchListener implements View.OnTouchListener {
 
     private int initialX;
     private int initialY;
@@ -17,8 +17,8 @@ public class MeterTouchListener implements View.OnTouchListener {
     private WindowManager.LayoutParams paramsF;
     private WindowManager windowManager;
 
-    public MeterTouchListener(WindowManager.LayoutParams paramsF,
-                              WindowManager windowManager) {
+    public DancerTouchListener(WindowManager.LayoutParams paramsF,
+                               WindowManager windowManager) {
         this.windowManager = windowManager;
         this.paramsF = paramsF;
     }

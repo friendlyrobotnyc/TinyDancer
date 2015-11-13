@@ -10,7 +10,7 @@ import android.view.Choreographer;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.codemonkeylabs.fpslibrary.ui.MeterPresenter;
+import com.codemonkeylabs.fpslibrary.ui.TinyCoach;
 
 /**
  * Created by brianplummer on 8/29/15.
@@ -19,16 +19,16 @@ public class TinyDancerBuilder
 {
     private static FPSConfig fpsConfig;
     private static FPSFrameCallback fpsFrameCallback;
-    private static MeterPresenter meterPresenter;
+    private static TinyCoach tinyCoach;
     private static Foreground.Listener foregroundListener = new Foreground.Listener() {
         @Override
         public void onBecameForeground() {
-            meterPresenter.show();
+            tinyCoach.show();
         }
 
         @Override
         public void onBecameBackground() {
-            meterPresenter.hide(false);
+            tinyCoach.hide(false);
         }
     };
 
@@ -59,10 +59,10 @@ public class TinyDancerBuilder
 
         Foreground.get(context).removeListener(foregroundListener);
         // remove the view from the window
-        meterPresenter.destroy();
+        tinyCoach.destroy();
 
         // null it all out
-        meterPresenter = null;
+        tinyCoach = null;
         fpsFrameCallback = null;
         fpsConfig = null;
     }
@@ -82,7 +82,7 @@ public class TinyDancerBuilder
         }
 
         //are we running?  if so, just return and ignore
-        if (meterPresenter != null) {
+        if (tinyCoach != null) {
             return;
         }
 
@@ -90,10 +90,10 @@ public class TinyDancerBuilder
         setFrameRate(context);
 
         // create the presenter that updates the view
-        meterPresenter = new MeterPresenter((Application) context.getApplicationContext(), fpsConfig);
+        tinyCoach = new TinyCoach((Application) context.getApplicationContext(), fpsConfig);
 
         // create our choreographer callback and register it
-        fpsFrameCallback = new FPSFrameCallback(fpsConfig, meterPresenter);
+        fpsFrameCallback = new FPSFrameCallback(fpsConfig, tinyCoach);
         Choreographer.getInstance().postFrameCallback(fpsFrameCallback);
 
         //set activity background/foreground listener
