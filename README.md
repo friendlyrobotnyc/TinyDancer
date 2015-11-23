@@ -26,19 +26,28 @@ public class DebugApplication extends Application {
              .show(this);
              
    //alternatively
-   new TinyDancerBuilder()
+   TinyDancer.create()
       .redFlagPercentage(.1f) // set red indicator for 10%
       .startingGravity(Gravity.TOP)
       .startingXPosition(200)
       .startingYPosition(600)
       .show(this);
+
+   //you can add a callback to get frame times and the calculated
+   //number of dropped frames within that window
+   TinyDancer.create()
+       .addFrameDataCallback(new FrameDataCallback() {
+        @Override
+            public void doFrame(long previousFrameNS, long currentFrameNS, int droppedFrames) {
+                //collect your stats here
+            }
+        })
+        .show(this);
   }
 }
 ```
 
 **You're good to go!** Tiny Dancer will show a small draggable view overlay with FPS as well as a color indicator of when FPS drop.
-
-
 
 
 
