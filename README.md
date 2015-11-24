@@ -12,7 +12,7 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   debugCompile 'com.github.brianPlummer:tinydancer:0.0.4'
+   debugCompile 'com.github.brianPlummer:tinydancer:0.0.5'
  }
 ```
 
@@ -37,10 +37,10 @@ public class DebugApplication extends Application {
    //number of dropped frames within that window
    TinyDancer.create()
        .addFrameDataCallback(new FrameDataCallback() {
-        @Override
-        public void doFrame(long previousFrameNS, long currentFrameNS, int droppedFrames) {
-            //collect your stats here
-        }
+          @Override
+          public void doFrame(long previousFrameNS, long currentFrameNS, int droppedFrames) {
+             //collect your stats here
+          }
         })
         .show(this);
   }
