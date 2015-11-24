@@ -38,9 +38,9 @@ public class DebugApplication extends Application {
    TinyDancer.create()
        .addFrameDataCallback(new FrameDataCallback() {
         @Override
-            public void doFrame(long previousFrameNS, long currentFrameNS, int droppedFrames) {
-                //collect your stats here
-            }
+        public void doFrame(long previousFrameNS, long currentFrameNS, int droppedFrames) {
+            //collect your stats here
+        }
         })
         .show(this);
   }
@@ -48,7 +48,6 @@ public class DebugApplication extends Application {
 ```
 
 **You're good to go!** Tiny Dancer will show a small draggable view overlay with FPS as well as a color indicator of when FPS drop.
-
 
 
 See sample application that simulates excessive bind time
