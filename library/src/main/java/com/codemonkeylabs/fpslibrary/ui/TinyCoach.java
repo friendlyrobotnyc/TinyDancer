@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.app.Application;
 import android.app.Service;
 import android.graphics.PixelFormat;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -19,11 +21,21 @@ import java.util.List;
 
 public class TinyCoach
 {
-
     private FPSConfig fpsConfig;
     private View meterView;
     private final WindowManager windowManager;
     private int shortAnimationDuration = 200, longAnimationDuration = 700;
+
+    // detect double tap so we can hide tinyDancer
+    private GestureDetector.SimpleOnGestureListener simpleOnGestureListener = new GestureDetector.SimpleOnGestureListener(){
+        @Override
+        public boolean onDoubleTap(MotionEvent e)
+        {
+            // hide but don't remove view
+            hide(false);
+            return super.onDoubleTap(e);
+        }
+    };
 
     public TinyCoach(Application context, FPSConfig config) {
 
@@ -57,8 +69,14 @@ public class TinyCoach
         // add view to the window
         windowManager.addView(view, paramsF);
 
-        //attach touch listener
-        meterView.setOnTouchListener(new DancerTouchListener(paramsF, windowManager));
+        // create gesture detector to listen for double taps
+        GestureDetector gestureDetector = new GestureDetector(view.getContext(), simpleOnGestureListener);
+
+        // attach touch listener
+        view.setOnTouchListener(new DancerTouchListener(paramsF, windowManager, gestureDetector));
+
+        // disable haptic feedback
+        view.setHapticFeedbackEnabled(false);
 
         // show the meter
         show();

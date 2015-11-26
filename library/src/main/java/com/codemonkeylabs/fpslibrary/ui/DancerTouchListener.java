@@ -1,5 +1,6 @@
 package com.codemonkeylabs.fpslibrary.ui;
 
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,15 +17,18 @@ public class DancerTouchListener implements View.OnTouchListener {
 
     private WindowManager.LayoutParams paramsF;
     private WindowManager windowManager;
+    private GestureDetector gestureDetector;
 
     public DancerTouchListener(WindowManager.LayoutParams paramsF,
-                               WindowManager windowManager) {
+                               WindowManager windowManager, GestureDetector gestureDetector) {
         this.windowManager = windowManager;
         this.paramsF = paramsF;
+        this.gestureDetector = gestureDetector;
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 initialX = paramsF.x;
