@@ -81,8 +81,9 @@ public class TinyDancerBuilder
             return;
         }
 
-        //are we running?  if so, just return and ignore
+        //are we running?  if so, call tinyCoach.show() and return
         if (tinyCoach != null) {
+            tinyCoach.show();
             return;
         }
 
