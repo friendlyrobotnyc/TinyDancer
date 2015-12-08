@@ -11,8 +11,8 @@ public class TinyDancer
         return new TinyDancerBuilder();
     }
 
-    public static void hide(Application context) {
-        TinyDancerBuilder.hide(context);
+    public static void hide(Content context) {
+        TinyDancerBuilder.hide(context.getApplicationContext());
     }
 
 }
