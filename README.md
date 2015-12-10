@@ -14,7 +14,7 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   debugCompile 'com.github.brianPlummer:tinydancer:0.0.7'
+   debugCompile 'com.github.brianPlummer:tinydancer:0.0.8'
  }
 ```
 
