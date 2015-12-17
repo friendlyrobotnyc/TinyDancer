@@ -3,7 +3,7 @@ Change Log
 
 ## Version 0.0.9
 _2015-12-16_
-*  fix TinyDancer.hide() to take Context
+*  fix TinyDancer.hide() to take Context [Issue #26] (https://github.com/brianPlummer/TinyDancer/issues/26)
 
 ## Version 0.0.8
 
