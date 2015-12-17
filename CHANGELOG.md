@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## Version 0.0.9
+_2015-12-16_
+*  fix TinyDancer.hide() to take Context
+
 ## Version 0.0.8
 
 _2015-12-14_
