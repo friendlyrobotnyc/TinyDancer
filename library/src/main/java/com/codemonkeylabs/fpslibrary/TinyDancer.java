@@ -1,6 +1,6 @@
 package com.codemonkeylabs.fpslibrary;
 
-import android.app.Application;
+import android.content.Context;
 
 /**
  * Created by brianplummer on 8/29/15.
@@ -11,7 +11,7 @@ public class TinyDancer
         return new TinyDancerBuilder();
     }
 
-    public static void hide(Content context) {
+    public static void hide(Context context) {
         TinyDancerBuilder.hide(context.getApplicationContext());
     }
 
