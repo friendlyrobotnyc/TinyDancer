@@ -52,7 +52,7 @@ public class DebugApplication extends Application {
 **You're good to go!** Tiny Dancer will show a small draggable view overlay with FPS as well as a color indicator of when FPS drop.  You can double tap the overlay to explicitly hide it.
 
 
-See sample application that simulates excessive bind time
+See sample application that simulates excessive bind time:
 
 ![Tiny Dancer Sample](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tinydancer1.gif "Tiny Dancer Sample")
 
