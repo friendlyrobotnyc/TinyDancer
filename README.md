@@ -8,6 +8,9 @@ A real time frames per second measuring library for Android that also shows a co
 
 ![Tiny Dancer](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tinydancer2.png "Tiny Dancer")
 
+## Min SDK
+Tiny Dancer min sdk is API 16
+
 ## Getting started
 
 In your `build.gradle`:
