@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -36,6 +35,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.dagger:dagger:2.0.2'
-    apt 'com.google.dagger:dagger-compiler:2.0.2'
+
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.0.2'
+
     provided 'org.glassfish:javax.annotation:10.0-b28'
 }
+
