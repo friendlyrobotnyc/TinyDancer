@@ -4,7 +4,7 @@ A real time frames per second measuring library for Android that also shows a co
 
  **New** Double tap overlay to hide!
 
-*“Perf Matters ”* - Random Guy at Meetup
+*“Perf Matters”* - Random Guy at Meetup
 
 ![Tiny Dancer](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tinydancer2.png "Tiny Dancer")
 
@@ -17,7 +17,9 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   debugCompile 'com.github.brianPlummer:tinydancer:0.0.9'
+   debugCompile "com.github.brianPlummer:tinydancer:0.0.9"
+   releaseCompile "com.github.brianPlummer:tinydancer-noop:<latest>"
+   testCompile "com.github.brianPlummer:tinydancer-noop:<latest>"
  }
 ```
 

@@ -2,3 +2,4 @@ rootProject.name = "TinyDancer"
 
 include ":example"
 include ":tinydancer"
+include ":tinydancer-noop"
