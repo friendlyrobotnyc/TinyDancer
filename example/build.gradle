@@ -11,23 +11,32 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("./debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.debug
         }
     }
+
     lintOptions {
         disable "InvalidPackage"
     }
 }
 
 dependencies {
-    //compile against maven central repo
-    //compile "com.github.brianPlummer:tinydancer:0.0.1"
-
-    //compile against local library
-    compile project(":tinydancer")
+    debugCompile project(":tinydancer")
+    releaseCompile project(":tinydancer-noop")
 
     compile deps.appcompatv7
     compile deps.recyclerviewv7
@@ -37,5 +46,7 @@ dependencies {
     annotationProcessor deps.daggerCompiler
 
     provided deps.javaxAnnotation
+
+    testCompile project(":tinydancer-noop")
 }
 
