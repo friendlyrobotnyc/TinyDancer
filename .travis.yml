@@ -7,12 +7,12 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-23.0.2
-    - android-23
+    - build-tools-24.0.3
+    - android-24
     - extra-android-m2repository
 
 script:
-  - ./gradlew clean assembleDebug --stacktrace
+  - ./gradlew clean assembleDebug testDebug --stacktrace
 
 branches:
   except:
@@ -27,4 +27,3 @@ cache:
   directories:
     - $HOME/.m2
     - $HOME/.gradle
-

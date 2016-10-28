@@ -19,3 +19,36 @@ allprojects {
     }
 }
 
+// Variables for entire project
+ext {
+    // SDK versions
+    minSdkVersion = 16
+    targetSdkVersion = 24
+    compileSdkVersion = 24
+    buildToolsVersion = "24.0.3"
+    sourceCompatibilityVersion = JavaVersion.VERSION_1_7
+    targetCompatibilityVersion = JavaVersion.VERSION_1_7
+
+    // Common versions
+    supportLibraryVersion = "24.2.1"
+    butterKnifeVersion = "7.0.1"
+    daggerVersion = "2.0.2"
+}
+
+// Dependencies
+ext.deps = [
+        // compile
+        appcompatv7    : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+        recyclerviewv7 : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+        butterknife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
+        dagger         : "com.google.dagger:dagger:${daggerVersion}",
+
+        // annotationProcessor
+        daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+
+        // provided
+        javaxAnnotation: "org.glassfish:javax.annotation:10.0-b28",
+
+        // testCompile
+        junit          : "junit:junit:4.12"
+]
