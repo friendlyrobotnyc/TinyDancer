@@ -27,7 +27,7 @@ dependencies {
     //compile 'com.github.brianPlummer:tinydancer:0.0.1'
 
     //compile against local library
-    compile project(':library')
+    compile project(':tinydancer')
 
     compile deps.appcompatv7
     compile deps.recyclerviewv7
