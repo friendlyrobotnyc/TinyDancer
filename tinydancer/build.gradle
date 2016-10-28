@@ -1,5 +1,4 @@
-apply plugin: 'com.android.library'
-//apply from: 'maven-push.gradle'
+apply plugin: "com.android.library"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -14,7 +13,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
@@ -22,3 +21,5 @@ android {
 dependencies {
     testCompile deps.junit
 }
+
+apply from: rootProject.file("gradle/maven-push.gradle")

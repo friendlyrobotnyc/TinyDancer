@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath "com.android.tools.build:gradle:2.2.2"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -33,6 +33,24 @@ ext {
     supportLibraryVersion = "24.2.1"
     butterKnifeVersion = "7.0.1"
     daggerVersion = "2.0.2"
+
+    // POM file
+    GROUP = "com.github.brianPlummer"
+    VERSION_NAME = "1.0.0-SNAPSHOT"
+    POM_PACKAGING = "pom"
+    POM_DESCRIPTION = "Tiny Dancer"
+
+    POM_URL = "https://github.com/friendlyrobotnyc/TinyDancer/"
+    POM_SCM_URL = "https://github.com/friendlyrobotnyc/TinyDancer/"
+    POM_SCM_CONNECTION = "scm:git:https://github.com/friendlyrobotnyc/TinyDancer.git"
+    POM_SCM_DEV_CONNECTION = "scm:git:git@github.com:friendlyrobotnyc/TinyDancer.git"
+
+    POM_LICENCE_NAME = "The MIT License (MIT)"
+    POM_LICENCE_URL = "https://opensource.org/licenses/MIT"
+    POM_LICENCE_DIST = "repo"
+
+    POM_DEVELOPER_ID = "brianPlummer"
+    POM_DEVELOPER_NAME = "Brian Plummer"
 }
 
 // Dependencies
