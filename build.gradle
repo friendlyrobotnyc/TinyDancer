@@ -68,5 +68,6 @@ ext.deps = [
         javaxAnnotation: "org.glassfish:javax.annotation:10.0-b28",
 
         // testCompile
-        junit          : "junit:junit:4.12"
+        junit          : "junit:junit:4.12",
+        assertJ        : "org.assertj:assertj-core:1.7.1"
 ]
