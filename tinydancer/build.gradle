@@ -21,6 +21,7 @@ android {
 
 dependencies {
     testCompile deps.junit
+    testCompile deps.assertJ
 }
 
 apply from: rootProject.file("gradle/maven-push.gradle")
