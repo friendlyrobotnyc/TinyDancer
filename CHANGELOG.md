@@ -1,5 +1,8 @@
 Change Log
 ==========
+## Version 0.1.0
+_2016-10-30_
+* introducing a no-op aar option
 
 ## Version 0.0.9
 _2015-12-16_

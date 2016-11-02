@@ -1,29 +1,28 @@
 language: android
-
 jdk:
- - oraclejdk8
-
+- oraclejdk8
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-24.0.3
-    - android-24
-    - extra-android-m2repository
-
+  - tools
+  - platform-tools
+  - build-tools-24.0.3
+  - android-24
+  - extra-android-m2repository
 script:
-  - ./gradlew clean assembleDebug testDebug --stacktrace
-
+- "./gradlew clean assembleDebug testDebug --stacktrace"
 branches:
   except:
-    - gh-pages
-
+  - gh-pages
 notifications:
   email: false
-
 sudo: false
-
 cache:
   directories:
-    - $HOME/.m2
-    - $HOME/.gradle
+  - "$HOME/.m2"
+  - "$HOME/.gradle"
+env:
+  global:
+  - secure: "ot8KmdMnmo4JMTSAHGXuUBUuuuRo+2GLbRCyyc9FaREcwTLFQmNSqGUrAQbaFq+NczXmI9K0Qa9pRiX97bERC4j9ingFC8MqgAAEDNK2jSDpP2rJ4ft1Ywh7X2qXsG++UCZcYWwePxON4CaihCpu73WEx4+J2R2QebttQZKAO2eUqwwIA3THRHTrioSLRxB+KA8J87HaxC1t4pVp8FItG8bjmDMK3zxp9ihcm5TgjvCxGBCHH4c4JF9YBmjKw26apOahmLIUS+2jeutPJN5be5IY07RW3Kn6DYkew9qL+XQQ2d5OB7Tx7HdpgjhUe1vJM4eMBjs49RufSZSFy80vtSWl9K7zzaBHM57fipSNo1Hz0CF8o4kywsj7FnqIw4k22Gbfbf6GznrQ4ntAch/WLWNtVan3bqE21fmGdb8ag6UvyT73c4AYysYNke/I4mAlgLBgOdlU0BwWco9RW2K0Kv48EH2TZrTwF2aWGTOZgjQBPqRio1LKfDf3FTuPSdUloq4v8zMET/Y4XB76yR+nTFHTZ2SLOGhnZgY7+L3L8KCpv3oby4G8td2w1V/t/34n0OBR+oeQfu+bNOKNlvoABexZq0Z9HCsVYa8zaPpNgytlCXD0EFWc3j6OChpGU6Gc3Mkmxx9eXcJUhMzCdaGRvtjmsl4ghbPa0ty/Mi0Zp+I="
+  -secure: "PGLU0cq17VX6/7Pk+T93100bjcOuyE/++lURVroSombHCPTf5lgiWgf2+WKF1NMLKIWwTMiJ8DHpBPVj5L4seQZIZRC3ouR+EZSsvca2seSlyuhE/gu9MyOuumjxgT1QOeJALmrQYxJNzN3c09Ml6oXejD1m//x/PBHOSpCUwXnWhX2FUDvvfQauKSlQn1lTGR7diDYnLOpHoOA02q0PNO9x5ec84sbkv11eqTehnAudFGMwrgw6WAG+z77DwytwbxGCO7TmpgWdqwaYlufSnMbPY5ehydOL0Rcr/h7T0Ta0OSNCBjZc7oGV8fpJH2y/8PVIm9hEiECFqUfcBFi6C9eP8ngbDY0yD1sl3BkU6So+JH/gRolTpphLimXtJZ23G/38++I6xVB6WMMVQYeXybj/4audZ8d8iL0KbTQ6Ogyti3AirFvjunQR06ndAzyxQ5PywtMMZSXQogiBNAR0G2OmTwaJl3TZVSTRSoTdPgB9Cobj0cp+W3SKqW7DWKZfUuSZ+IgVHnSL1FOp69Jx5w8wE+uCg3IgM5jDDd3GCd+RNQ/aWXRvcPiJKaQXq3vWEzWCrfhlWjyyDQqcJnOM2kQiDw+rPzTk6M7nNU1i9UvJwIOD7Fe7kFdhoUzJvTpJe5Vw8vGAAl6O4kVBWTQaVt4Onm5YBdP/F4+zNFIElHE="
+after_success:
+  - ./gradlew uploadArchives
