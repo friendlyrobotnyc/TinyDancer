@@ -17,9 +17,9 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   debugCompile "com.github.brianPlummer:tinydancer:0.0.9"
-   releaseCompile "com.github.brianPlummer:tinydancer-noop:<latest>"
-   testCompile "com.github.brianPlummer:tinydancer-noop:<latest>"
+   debugCompile "com.github.brianPlummer:tinydancer:0.1.0"
+   releaseCompile "com.github.brianPlummer:tinydancer-noop:0.1.0"
+   testCompile "com.github.brianPlummer:tinydancer-noop:0.1.0"
  }
 ```
 
