@@ -141,6 +141,7 @@ public class TinyDancerBuilder
      */
     public TinyDancerBuilder startingXPosition(int xPosition) {
         fpsConfig.startingXPosition = xPosition;
+        fpsConfig.xOrYSpecified = true;
         return this;
     }
 
@@ -151,6 +152,7 @@ public class TinyDancerBuilder
      */
     public TinyDancerBuilder startingYPosition(int yPosition) {
         fpsConfig.startingYPosition = yPosition;
+        fpsConfig.xOrYSpecified = true;
         return this;
     }
 
@@ -161,6 +163,7 @@ public class TinyDancerBuilder
      */
     public TinyDancerBuilder startingGravity(int gravity) {
         fpsConfig.startingGravity = gravity;
+        fpsConfig.gravitySpecified = true;
         return this;
     }
 

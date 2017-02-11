@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class FPSConfig implements Serializable
 {
+    public static int DEFAULT_GRAVITY = Gravity.TOP | Gravity.START;
+
     public float redFlagPercentage = 0.2f; //
     public float yellowFlagPercentage = 0.05f; //
     public float refreshRate = 60; //60fps
@@ -18,7 +20,9 @@ public class FPSConfig implements Serializable
     // starting coordinates
     public int startingXPosition = 200;
     public int startingYPosition = 600;
-    public int startingGravity = Gravity.TOP | Gravity.START;
+    public int startingGravity = DEFAULT_GRAVITY;
+    public boolean xOrYSpecified = false;
+    public boolean gravitySpecified = false;
 
     // client facing callback that provides frame info
     public FrameDataCallback frameDataCallback = null;
