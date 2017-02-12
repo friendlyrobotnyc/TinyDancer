@@ -4,7 +4,6 @@ import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SeekBar;
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         loadIndicator.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                Log.e("#### FOO","FOO:" + i);
                 recyclerView.setMegaBytes(Float.valueOf(i));
                 recyclerView.notifyDataSetChanged();
             }
