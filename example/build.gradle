@@ -39,6 +39,7 @@ dependencies {
     releaseCompile project(":tinydancer-noop")
 
     compile deps.appcompatv7
+    compile deps.supportDesign
     compile deps.recyclerviewv7
     compile deps.butterknife
     compile deps.dagger

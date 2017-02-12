@@ -2,6 +2,7 @@ package com.codemonkeylabs.fpslibrary.sample.UI;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.SystemClock;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,19 +30,10 @@ public class FPSSampleViewHolder extends RecyclerView.ViewHolder
 
     public void onBind(int value, float megaBytes) {
 
-        int multiplier = 22;
-        int hundred = value/100;
-        int tens = (value- (hundred)*100)/10;
-        int ones = value - (hundred*100) - (tens*10);
-        int r = hundred*multiplier;
-        int g = tens*multiplier;
-        int b = ones*multiplier;
-        int colorVal = Color.rgb(r,g,b);
-        colorImg.setImageDrawable(new ColorDrawable(colorVal));
+        configureColor(value);
 
-
-        int total = (int)(megaBytes*100f);
-        long start = System.currentTimeMillis();
+        int total = (int)(megaBytes * 100f);
+        long start = SystemClock.elapsedRealtime();
         int startInt = (int) start;
         for (int i = 0; i < total; i++)
         {
@@ -51,11 +43,21 @@ public class FPSSampleViewHolder extends RecyclerView.ViewHolder
                 data[e] = startInt;
             }
         }
-        long end = System.currentTimeMillis();
+        long end = SystemClock.elapsedRealtime();
         long bindTimeMs = end - start;
 
         bindTime.setText(bindTimeMs + "ms onBind()");
-
     }
 
+    private void configureColor(int value) {
+        int multiplier = 22;
+        int hundred = value/100;
+        int tens = (value- (hundred)*100)/10;
+        int ones = value - (hundred*100) - (tens*10);
+        int r = hundred*multiplier;
+        int g = tens*multiplier;
+        int b = ones*multiplier;
+        int colorVal = Color.rgb(r,g,b);
+        colorImg.setImageDrawable(new ColorDrawable(colorVal));
+    }
 }

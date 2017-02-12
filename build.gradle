@@ -57,6 +57,7 @@ ext {
 ext.deps = [
         // compile
         appcompatv7    : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+        supportDesign  : "com.android.support:design:$supportLibraryVersion",
         recyclerviewv7 : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
         butterknife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
         dagger         : "com.google.dagger:dagger:${daggerVersion}",
