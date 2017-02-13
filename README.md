@@ -59,6 +59,6 @@ public class DebugApplication extends Application {
 
 See sample application that simulates excessive bind time:
 
-![Tiny Dancer Sample](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tinydancer1.gif "Tiny Dancer Sample")
+![Tiny Dancer Sample](https://raw.githubusercontent.com/brianPlummer/TinyDancer/master/assets/tiny_dancer_011_example.gif "Tiny Dancer Sample")
 
 Have an project with performance issues? We'd be happy to help tune it.  mike@friendlyrobot.nyc
