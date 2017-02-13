@@ -1,5 +1,11 @@
 Change Log
 ==========
+## Version 0.1.1
+_2017-02-12_
+ * Remove permission "SYSTEM_ALERT_WINDOW" for no-op release [Issue #50] (https://github.com/brianPlummer/TinyDancer/issues/50)
+ * TinyDancerBuilder now only honors gravity flag if X or Y starting position is not set. [Issue #48] (https://github.com/brianPlummer/TinyDancer/issues/58)
+ * Minor pretty enhancement to example
+
 ## Version 0.1.0
 _2016-10-30_
 * introducing a no-op aar option

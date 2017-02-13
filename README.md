@@ -17,9 +17,9 @@ In your `build.gradle`:
 
 ```gradle
  dependencies {
-   debugCompile "com.github.brianPlummer:tinydancer:0.1.0"
-   releaseCompile "com.github.brianPlummer:tinydancer-noop:0.1.0"
-   testCompile "com.github.brianPlummer:tinydancer-noop:0.1.0"
+   debugCompile "com.github.brianPlummer:tinydancer:0.1.1"
+   releaseCompile "com.github.brianPlummer:tinydancer-noop:0.1.1"
+   testCompile "com.github.brianPlummer:tinydancer-noop:0.1.1"
  }
 ```
 
@@ -35,7 +35,6 @@ public class DebugApplication extends Application {
    //alternatively
    TinyDancer.create()
       .redFlagPercentage(.1f) // set red indicator for 10%
-      .startingGravity(Gravity.TOP)
       .startingXPosition(200)
       .startingYPosition(600)
       .show(this);
