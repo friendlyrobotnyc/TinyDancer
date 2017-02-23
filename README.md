@@ -10,6 +10,7 @@ A real time frames per second measuring library for Android that also shows a co
 
 ## Min SDK
 Tiny Dancer min sdk is API 16
+**Unfortunately this will not work on Android TV**
 
 ## Getting started
 
@@ -29,15 +30,16 @@ In your `DebugApplication` class:
 public class DebugApplication extends Application {
 
   @Override public void onCreate() {
+
    TinyDancer.create()
-             .show(this);
+             .show(context);
              
    //alternatively
    TinyDancer.create()
-      .redFlagPercentage(.1f) // set red indicator for 10%
+      .redFlagPercentage(.1f) // set red indicator for 10%....different from default
       .startingXPosition(200)
       .startingYPosition(600)
-      .show(this);
+      .show(context);
 
    //you can add a callback to get frame times and the calculated
    //number of dropped frames within that window
@@ -48,7 +50,7 @@ public class DebugApplication extends Application {
              //collect your stats here
           }
         })
-        .show(this);
+        .show(context);
   }
 }
 ```
