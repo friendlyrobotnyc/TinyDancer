@@ -10,6 +10,7 @@ A real time frames per second measuring library for Android that also shows a co
 
 ## Min SDK
 Tiny Dancer min sdk is API 16
+
 **Unfortunately this will not work on Android TV**
 
 ## Getting started
