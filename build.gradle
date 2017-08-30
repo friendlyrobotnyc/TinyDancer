@@ -42,7 +42,7 @@ ext {
 
     // POM file
     GROUP = "com.github.brianPlummer"
-    VERSION_NAME = "0.1.2"
+    VERSION_NAME = "0.1.3-snapshot"
     POM_PACKAGING = "pom"
     POM_DESCRIPTION = "Tiny Dancer"
 
