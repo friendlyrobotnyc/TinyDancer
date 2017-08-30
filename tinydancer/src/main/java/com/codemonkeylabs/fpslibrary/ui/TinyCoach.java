@@ -54,10 +54,12 @@ public class TinyCoach
 
     private void addViewToWindow(View view) {
 
+        int permissionFlag = PermissionCompat.getFlag();
+
         WindowManager.LayoutParams paramsF = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
+                permissionFlag,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
 

@@ -4,6 +4,9 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:2.2.3"
@@ -16,6 +19,9 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
 }
 
@@ -23,14 +29,14 @@ allprojects {
 ext {
     // SDK versions
     minSdkVersion = 16
-    targetSdkVersion = 25
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.1"
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.1"
     sourceCompatibilityVersion = JavaVersion.VERSION_1_7
     targetCompatibilityVersion = JavaVersion.VERSION_1_7
 
     // Common versions
-    supportLibraryVersion = "25.0.1"
+    supportLibraryVersion = "26.0.0"
     butterKnifeVersion = "7.0.1"
     daggerVersion = "2.8"
 
