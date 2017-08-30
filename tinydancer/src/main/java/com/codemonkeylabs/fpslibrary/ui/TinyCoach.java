@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.app.Application;
 import android.app.Service;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -54,10 +55,17 @@ public class TinyCoach
 
     private void addViewToWindow(View view) {
 
+        int permissionFlag;
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            permissionFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            permissionFlag = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
         WindowManager.LayoutParams paramsF = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
+                permissionFlag,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
 
