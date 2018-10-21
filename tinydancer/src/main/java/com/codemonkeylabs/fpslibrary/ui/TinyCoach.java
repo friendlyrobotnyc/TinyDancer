@@ -22,7 +22,7 @@ import java.util.List;
 public class TinyCoach
 {
     private FPSConfig fpsConfig;
-    private View meterView;
+    private TextView meterView;
     private final WindowManager windowManager;
     private int shortAnimationDuration = 200, longAnimationDuration = 700;
 
@@ -42,13 +42,20 @@ public class TinyCoach
         fpsConfig = config;
 
         //create meter view
-        meterView = LayoutInflater.from(context).inflate(R.layout.meter_view, null);
+        meterView = (TextView) LayoutInflater.from(context).inflate(R.layout.meter_view, null);
 
         //set initial fps value....might change...
-        ((TextView) meterView).setText((int) fpsConfig.refreshRate + "");
+        meterView.setText((int) fpsConfig.refreshRate + "");
 
         // grab window manager and add view to the window
         windowManager = (WindowManager) meterView.getContext().getSystemService(Service.WINDOW_SERVICE);
+
+        int minWidth = meterView.getLineHeight()
+                + meterView.getTotalPaddingTop()
+                + meterView.getTotalPaddingBottom()
+                + (int) meterView.getPaint().getFontMetrics().bottom;
+        meterView.setMinWidth(minWidth);
+
         addViewToWindow(meterView);
     }
 
@@ -107,7 +114,7 @@ public class TinyCoach
             meterView.setBackgroundResource(R.drawable.fpsmeterring_good);
         }
 
-        ((TextView) meterView).setText(answer.getValue() + "");
+        meterView.setText(answer.getValue() + "");
     }
 
     public void destroy() {
