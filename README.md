@@ -1,4 +1,8 @@
-# Tiny Dancer [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TinyDancer-green.svg?style=true)](https://android-arsenal.com/details/1/3172) [![Build Status](https://travis-ci.org/friendlyrobotnyc/TinyDancer.svg?branch=master)](https://travis-ci.org/friendlyrobotnyc/TinyDancer)
+# DEPRECATED
+
+TinyDancer is deprecated. No more development will be taking place. Check out the [Google Android developer documentation for UI performance testing](https://developer.android.com/training/testing/performance) 
+
+# Tiny Dancer 
 
 A real time frames per second measuring library for Android that also shows a color coded metric.  This metric is based on percentage of time spent when you have dropped 2 or more frames.  If the application spends more than 5% in this state then the color turns yellow, when you have reached the 20% threshold the indicator turns red.  
 
